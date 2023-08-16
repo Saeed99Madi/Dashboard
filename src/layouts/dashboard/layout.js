@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // @mui
 import Box from '@mui/material/Box';
@@ -18,6 +19,16 @@ import NavHorizontal from './nav-horizontal';
 export default function DashboardLayout({ children }) {
   const settings = useSettingsContext();
 
+  const handleCloseNav = () => {
+    settings.onUpdate('themeLayout', 'mini');
+    nav.onFalse();
+  }
+
+  const handleOpenNav = () => {
+    settings.onUpdate('themeLayout', 'vertical');
+    nav.onTrue();
+  }
+
   const lgUp = useResponsive('up', 'lg');
 
   const nav = useBoolean();
@@ -30,12 +41,12 @@ export default function DashboardLayout({ children }) {
 
   const renderHorizontal = <NavHorizontal />;
 
-  const renderNavVertical = <NavVertical openNav={nav.value} onCloseNav={nav.onFalse} />;
+  const renderNavVertical = <NavVertical openNav={nav.value} onCloseNav={handleCloseNav} />;
 
   if (isHorizontal) {
     return (
       <>
-        <Header onOpenNav={nav.onTrue} />
+        <Header onOpenNav={handleOpenNav} />
 
         {lgUp ? renderHorizontal : renderNavVertical}
 
@@ -47,7 +58,7 @@ export default function DashboardLayout({ children }) {
   if (isMini) {
     return (
       <>
-        <Header onOpenNav={nav.onTrue} />
+        <Header onOpenNav={handleOpenNav} />
 
         <Box
           sx={{
@@ -66,7 +77,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <>
-      <Header onOpenNav={nav.onTrue} />
+      <Header onOpenNav={handleOpenNav} />
 
       <Box
         sx={{
