@@ -2,8 +2,13 @@ import { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+
 //
 import App from './App';
+
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +18,9 @@ root.render(
   <HelmetProvider>
     <BrowserRouter>
       <Suspense>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
         <App />
+      </LocalizationProvider>
       </Suspense>
     </BrowserRouter>
   </HelmetProvider>

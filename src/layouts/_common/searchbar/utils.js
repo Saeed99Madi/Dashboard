@@ -1,5 +1,6 @@
 // utils
 import { flattenArray } from 'src/utils/flatten-array';
+import { fDate, fTimestamp } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -21,13 +22,80 @@ export function getAllItems({ data }) {
 
 // ----------------------------------------------------------------------
 
-export function applyFilter({ inputData, query }) {
-  if (query) {
+
+export function applyFilter({ inputData, comparator, filters, dateError }) {
+
+
+  const stabilizedThis = inputData.map((el, index) => [el, index]);
+
+  inputData = stabilizedThis.map((el) => el[0]);
+
+  if (filters?.SortBy)  {
+    if (filters?.SortBy === 'Latest created') {
+      inputData = inputData.reverse();
+    } else if (filters?.SortBy === 'Earlier created') {
+      inputData = inputData.sort((a, b) => comparator(a.createdAt, b.createdAt));
+    } else if (filters?.SortBy === 'Higher takeaways') {
+      console.log(inputData);
+      inputData = inputData.sort((a, b) =>  b.takeaway - a.takeaway);
+    } else if ( filters?.SortBy === 'Lowest takeaways') {
+      inputData = inputData.sort((a, b) =>  a.takeaway - b.takeaway);
+    } else if (filters?.SortBy === 'Created by A-Z') {
+      inputData = inputData.sort((a, b) => a.customer.name.localeCompare(b.customer.name));
+    } else if (filters?.SortBy === 'Created by Z-A') {
+      inputData = inputData.sort((a, b) => b.customer.name.localeCompare(a.customer.name));
+    } else if (filters?.SortBy === 'Organization by A-Z') {
+      inputData = inputData.sort((a, b) => a.user.name.localeCompare(b.user.name));
+    } else if (filters?.SortBy === 'Organization by Z-A') {
+      inputData = inputData.sort((a, b) => b.user.name.localeCompare(a.user.name));
+    }
+  }
+
+  if (filters?.Revenue.length) {
+    console.log(inputData);
     inputData = inputData.filter(
-      (item) =>
-        item.title.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
-        item.path.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      (order) =>
+        filters?.Revenue.includes(order.Revenue)
     );
+  }
+
+  if (filters?.Author) {
+    inputData = inputData.filter(
+      (order) =>
+        order.customer.author.toLowerCase().indexOf(filters?.Author.toLowerCase()) !== -1
+    );
+  }
+
+  if(filters?.Time && filters.Time !== 'Custom' && !dateError) {
+    if (filters?.Time === 'Today') {
+      inputData = inputData.filter(
+        (order) =>
+        fDate(order.createdAt) === fDate(new Date())
+      );
+    } else if (filters?.Time === 'Last 7 days') {
+      console.log((fDate(new Date() - 7 * 24 * 60 * 60 * 1000)));
+      inputData = inputData.filter(
+        (order) =>
+        fDate(order.createdAt) >= (fDate(new Date() - 7 * 24 * 60 * 60 * 1000))
+      );
+    } else if (filters?.Time === 'Last 30 days') {
+        inputData = inputData.filter(
+        (order) =>
+          (fDate(order.createdAt) >= (fDate(new Date() - 30 * 24 * 60 * 60 * 1000)))
+        
+      );
+
+    }
+  }
+
+  if (!dateError) {
+    if (filters?.startDate && filters?.endDate) {
+      inputData = inputData.filter(
+        (order) =>
+          fTimestamp(order.createdAt) >= fTimestamp(filters?.startDate) &&
+          fTimestamp(order.createdAt) <= fTimestamp(filters?.endDate)
+      );
+    }
   }
 
   return inputData;
