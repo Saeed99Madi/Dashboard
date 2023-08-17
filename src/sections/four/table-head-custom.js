@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import { useSettingsContext } from 'src/components/settings';
 
 // ----------------------------------------------------------------------
 
@@ -33,8 +34,17 @@ export default function TableHeadCustom({
   onSelectAllRows,
   sx,
 }) {
+  const settings = useSettingsContext();
+
+  const isNavMini = settings.themeLayout === 'mini';
+  console.log(isNavMini);
+
   return (
-    <TableHead sx={sx}>
+    <TableHead sx={{
+      '& .MuiTableRow-root': {
+        borderBottom: '1px solid #ECECE9',
+      }
+    }}>
       <TableRow>
         {onSelectAllRows && (
           <TableCell padding="checkbox">
@@ -51,26 +61,14 @@ export default function TableHeadCustom({
             key={headCell.id}
             align={headCell.align || 'left'}
             sortDirection={orderBy === headCell.id ? order : false}
-            sx={{ width: headCell.width, minWidth: headCell.minWidth }}
+            sx={{
+              width: !isNavMini ? headCell.isNavMiniWidth : headCell.width,
+              minWidth: !isNavMini ? headCell.isNavMiniWidth : headCell.width,
+              borderTopLeftRadius: headCell.label === 'Meeting Report' ? '8px' : '',
+              borderTopRightRadius: headCell.label === 'Takeaway' ? '8px' : '',
+            }}
           >
-            {onSort ? (
-              <TableSortLabel
-                hideSortIcon
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : 'asc'}
-                onClick={() => onSort(headCell.id)}
-              >
-                {headCell.label}
-
-                {orderBy === headCell.id ? (
-                  <Box sx={{ ...visuallyHidden }}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
-            ) : (
-              headCell.label
-            )}
+            {headCell.label}
           </TableCell>
         ))}
       </TableRow>

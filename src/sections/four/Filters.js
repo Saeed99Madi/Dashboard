@@ -28,7 +28,6 @@ export default function Filters({
   filters,
   onFilters,
   dateError,
-  handleResetFilters,
 }) {
   
 
@@ -260,5 +259,4 @@ Filters.propTypes = {
   openCreateDialog: PropTypes.bool,
   onCloseCreateDialog: PropTypes.func,
   onOpenCreateDialog: PropTypes.func,
-  handleResetFilters: PropTypes.func,
 };

@@ -29,13 +29,13 @@ const defaultFilters = {
 };
 
 const TABLE_HEAD = [
-  { id: 'meetingReport', label: 'Meeting Report', width: 300 },
-  { id: 'createdBy', label: 'Created by', width: 180 },
-  { id: 'customer', label: 'Customer', width: 150 },
-  { id: 'uploaded', label: 'Uploaded', width: 130, align: 'center' },
-  { id: 'sentiment', label: 'Sentiment', width: 140 },
-  { id: 'participants', label: 'Participants', width: 100 },
-  { id: 'takeaway', label: 'Takeaway', width: 100 },
+  { id: 'meetingReport', label: 'Meeting Report', width: 300, isNavMiniWidth: 240 },
+  { id: 'createdBy', label: 'Created by', width: 180, isNavMiniWidth: 150 },
+  { id: 'customer', label: 'Customer', width: 150, isNavMiniWidth: 120 },
+  { id: 'uploaded', label: 'Uploaded', width: 130, align: 'center', isNavMiniWidth: 100 },
+  { id: 'sentiment', label: 'Sentiment', width: 140, isNavMiniWidth: 110 },
+  { id: 'participants', label: 'Participants', width: 100, isNavMiniWidth: 70 },
+  { id: 'takeaway', label: 'Takeaway', width: 100, isNavMiniWidth: 70 },
 ];
 
 
@@ -81,7 +81,7 @@ const canReset =
   !!filters.name || filters.status !== 'all' || (!!filters.startDate && !!filters.endDate);
 
   const handleResetFilters = useCallback(() => {
-    // setFilters(defaultFilters);
+    setFilters(defaultFilters);
   }, []);
   
 
@@ -115,6 +115,11 @@ const canReset =
     handleResetFilters();
   }, [handleResetFilters, openRevenueDialog]
   );
+
+  const handleCloseSortByDialog = useCallback(() => {
+    openSortByDialog.onFalse();
+    handleResetFilters();
+  }, [handleResetFilters, openSortByDialog])
   
 
   useEffect(() => {
@@ -122,10 +127,15 @@ const canReset =
   }, [filters]);
 
   return (
-    <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h4"> Page Four </Typography>
-
-      <Card>
+    <Container
+      maxWidth={settings.themeStretch ? false : 'xl'}
+      sx={{
+        '& .MuiPaper-root.MuiPaper-elevation': {
+          border: '1px solid #D6D8E1'
+        }
+      }}
+    >
+      <Card sx={{ m: '0 -1em' }}>
         <Filters
           openDateRange={openDateRange.value}
           onCloseDateRange={handleOnCloseDateRange}
@@ -135,16 +145,22 @@ const canReset =
           onOpenRevenueDialog={openRevenueDialog.onTrue}
           openSortByDialog={openSortByDialog.value}
           onOpenSortByDialog={openSortByDialog.onTrue}
-          onCloseSortByDialog={openSortByDialog.onFalse}
+          onCloseSortByDialog={handleCloseSortByDialog}
           openCreateDialog={openCreateDialog.value}
           onCloseCreateDialog={openCreateDialog.onFalse}
           onOpenCreateDialog={openCreateDialog.onTrue}
           filters={filters}
           onFilters={handleFilters}
           dateError={dateError}
-          handleResetFilters={handleResetFilters}
         />
-          <TableContainer sx={{ position: 'relative', overflow: 'unset' }}>
+          <TableContainer
+            sx={{
+              position: 'relative',
+              overflow: 'unset',
+              m: ' 0 30px',
+              maxWidth: 'calc(100% - 60px)'
+            }}
+          >
             <Scrollbar>
               <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
                 <TableHeadCustom

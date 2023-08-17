@@ -15,12 +15,20 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
-import { HEADER, NAV } from '../config-layout';
+import { Avatar, Box, Typography } from '@mui/material';
+import { useState } from 'react';
+import { _orders } from 'src/_mock/_order';
 import { Searchbar, AccountPopover, NotificationsPopover } from '../_common';
+import { HEADER, NAV } from '../config-layout';
 
 // ----------------------------------------------------------------------
 
 export default function Header({ onOpenNav }) {
+  const [tableData, setTableData] = useState(_orders);
+  console.log(tableData);
+
+  console.log(tableData);
+
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -34,6 +42,7 @@ export default function Header({ onOpenNav }) {
   const offset = useOffSetTop(HEADER.H_DESKTOP);
 
   const offsetTop = offset && !isNavHorizontal;
+  
 
   const renderContent = (
     <>
@@ -45,7 +54,46 @@ export default function Header({ onOpenNav }) {
         </IconButton>
       )}
 
-      <Searchbar />
+      <Box 
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          ml: 2,
+        }}  
+      >
+        <Typography sx={{mr: 2.5, fontSize: '17.2px', fontWeight: 600}}>Sales team</Typography>
+        {tableData.slice(0, 5).map((item) => (
+          <Avatar
+            sx={{
+              width: 32,
+              height: 32,
+              ml: '-10px',
+              border: '1px solid #fff',
+              cursor: 'pointer',
+            }}
+            src={item?.user?.avatarUrl}
+            key={item?.user?.id}
+            alt={item?.user?.name} />
+        ))}
+        <Box
+          sx={{
+            width: 32,
+            height: 32,
+            ml: '-10px',
+            backgroundColor: '#D8EBFD',
+            border: '1px solid #fff',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1,
+            cursor: 'pointer',
+          }}
+        >
+          <img src='/public/assets/Vector.png' alt='' />
+        </Box>
+      </Box>
 
       <Stack
         flexGrow={1}
