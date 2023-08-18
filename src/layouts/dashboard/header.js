@@ -18,16 +18,13 @@ import { useSettingsContext } from 'src/components/settings';
 import { Avatar, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import { _orders } from 'src/_mock/_order';
-import { Searchbar, AccountPopover, NotificationsPopover } from '../_common';
+import { AccountPopover, NotificationsPopover } from '../_common';
 import { HEADER, NAV } from '../config-layout';
 
 // ----------------------------------------------------------------------
 
 export default function Header({ onOpenNav }) {
-  const [tableData, setTableData] = useState(_orders);
-  console.log(tableData);
-
-  console.log(tableData);
+  const [tableData] = useState(_orders);
 
   const theme = useTheme();
 
