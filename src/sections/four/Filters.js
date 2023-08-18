@@ -28,6 +28,7 @@ export default function Filters({
   filters,
   onFilters,
   dateError,
+  
 }) {
   
 
@@ -231,7 +232,7 @@ export default function Filters({
       spacing={1}
       direction={{ xs: 'column', md: 'row' }}
       alignItems={{ xs: 'flex-end', md: 'center' }}
-      sx={{ width: 1, padding: 2 }}
+      sx={{ width: 1, padding: 3 }}
     >
       {renderFilterName}
 

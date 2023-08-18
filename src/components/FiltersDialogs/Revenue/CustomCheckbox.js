@@ -1,8 +1,11 @@
 import { Box, Checkbox, FormControlLabel, Typography } from '@mui/material'
 import PropTypes from 'prop-types';
-import React from 'react'
+import React, { useContext } from 'react'
+import { FiltersContext } from 'src/context/filtersContext';
 
 export default function CustomCheckbox({label, handleCheckboxChange}) {
+  const {filters} = useContext(FiltersContext);
+  console.log(filters);
   return (
     <FormControlLabel
       sx={{
@@ -29,6 +32,7 @@ export default function CustomCheckbox({label, handleCheckboxChange}) {
           sx={{ color: '#000', '&.Mui-checked': { color: '#2292F9'} }}
           value={label}
           onChange={handleCheckboxChange}
+          checked={filters.Revenue.includes(label) === true}
           />
         <Typography sx={{ fontWeight: 500, color: '#000', paddingTop: '0.2em' }}>
           {label}

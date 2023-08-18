@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 // @mui
-import { Card, Table, TableBody, TableContainer, Container, Typography } from '@mui/material';
+import { Card, Table, TableBody, TableContainer, Container } from '@mui/material';
+// src
 import { useSettingsContext } from 'src/components/settings';
 import { useTable } from 'src/components/table';
 import { _orders } from 'src/_mock/_order';
@@ -9,6 +10,8 @@ import Scrollbar from 'src/components/scrollbar/scrollbar';
 import { applyFilter } from 'src/layouts/_common/searchbar/utils';
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
+import ShowingFiltersResult from 'src/components/ShowingFiltersResult';
+import { FiltersContext } from 'src/context/filtersContext';
 import TableHeadCustom from '../table-head-custom';
 import { emptyRows, getComparator } from '../utils';
 import OrderTableRow from '../order-table-row';
@@ -17,16 +20,6 @@ import TableNoData from '../table-no-data';
 import Filters from '../Filters';
 
 // ----------------------------------------------------------------------
-const defaultFilters = {
-  Author: '',
-  Time: '',
-  Organization: null,
-  Sentiment: null,
-  startDate: null,
-  endDate: null,
-  Revenue: [],
-  SortBy: '',
-};
 
 const TABLE_HEAD = [
   { id: 'meetingReport', label: 'Meeting Report', width: 300, isNavMiniWidth: 240 },
@@ -42,7 +35,7 @@ const TABLE_HEAD = [
 export default function FourView() {
   const table = useTable({ defaultOrderBy: 'orderNumber' });
   const settings = useSettingsContext();
-  const [filters, setFilters] = useState(defaultFilters);
+  const {filters, setFilters, handleResetFilters} = useContext(FiltersContext);
   const [tableData, setTableData] = useState(_orders);
 
   const router = useRouter();
@@ -74,16 +67,13 @@ export default function FourView() {
         [name]: value,
       }));
     },
-    [table]
+    [setFilters, table]
   );
 
 const canReset =
   !!filters.name || filters.status !== 'all' || (!!filters.startDate && !!filters.endDate);
 
-  const handleResetFilters = useCallback(() => {
-    setFilters(defaultFilters);
-  }, []);
-  
+
 
   const denseHeight = table.dense ? 52 : 72;
 
@@ -105,14 +95,19 @@ const canReset =
     [router]
   );
 
-  const handleOnCloseDateRange = useCallback(() => {
+  const handleOnCloseDateRange = useCallback((type) => {
     openDateRange.onFalse();
-    handleResetFilters();
+    if (type !== 'continue') {
+      handleResetFilters();
+    }
   }, [handleResetFilters, openDateRange]);
   
-  const handleCloseRevenueDialog = useCallback(() => {
+  const handleCloseRevenueDialog = useCallback((type) => {
     openRevenueDialog.onFalse();
+    console.log(type.target.vale);
+    if (type !== 'continue') {
     handleResetFilters();
+    }
   }, [handleResetFilters, openRevenueDialog]
   );
 
@@ -152,13 +147,18 @@ const canReset =
           filters={filters}
           onFilters={handleFilters}
           dateError={dateError}
+          onContinueDateDialog={openDateRange.onFalse}
         />
+          <ShowingFiltersResult
+            handleOnCloseDateRange={handleOnCloseDateRange}
+            handleOnCloseRevenue={handleCloseRevenueDialog}
+          />
           <TableContainer
             sx={{
               position: 'relative',
               overflow: 'unset',
-              m: ' 0 30px',
-              maxWidth: 'calc(100% - 60px)'
+              m: ' 0 25px',
+              maxWidth: 'calc(100% - 50px)'
             }}
           >
             <Scrollbar>

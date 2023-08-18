@@ -1,4 +1,5 @@
 // utils
+import { format } from 'date-fns';
 import { flattenArray } from 'src/utils/flatten-array';
 import { fDate, fTimestamp } from 'src/utils/format-time';
 
@@ -81,10 +82,8 @@ export function applyFilter({ inputData, comparator, filters, dateError }) {
     } else if (filters?.Time === 'Last 30 days') {
         inputData = inputData.filter(
         (order) =>
-          (fDate(order.createdAt) >= (fDate(new Date() - 30 * 24 * 60 * 60 * 1000)))
+          (format(order.createdAt, 'yyyy-MM-dd')) >= (format((new Date() - 30 * 24 * 60 * 60 * 1000), 'yyyy-MM-dd')))
         
-      );
-
     }
   }
 

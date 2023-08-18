@@ -58,6 +58,7 @@ export default function RevenueDialog({open, onClose, handleFilterRevenue}) {
               width: '20em',
               }
           }}
+            value={checkedOptions}
           >
           <CustomCheckbox handleCheckboxChange={handleCheckboxChange} label="N/A" />
           <CustomCheckbox handleCheckboxChange={handleCheckboxChange} label="Low" />
@@ -75,7 +76,10 @@ export default function RevenueDialog({open, onClose, handleFilterRevenue}) {
               backgroundColor: '#E8E8EE',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => {
+              setCheckedOptions([])
+              onClose()
+            }}
           >
             CANCEL
           </Button>
@@ -89,7 +93,9 @@ export default function RevenueDialog({open, onClose, handleFilterRevenue}) {
               color: '#fff',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => {
+              onClose('continue')
+            }}
           >
             CONTINUE
           </Button>

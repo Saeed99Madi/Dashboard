@@ -16,6 +16,7 @@ import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 import ProgressBar from 'src/components/progress-bar';
 import MotionLazy from 'src/components/animate/motion-lazy';
 import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
+import { FiltersContextProvider } from './context/filtersContext';
 // auth
 // import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
 
@@ -37,6 +38,7 @@ export default function App() {
         themeStretch: false,
       }}
     >
+      <FiltersContextProvider>
       <ThemeProvider>
         <MotionLazy>
           <SettingsDrawer />
@@ -46,6 +48,7 @@ export default function App() {
           {/* </AuthConsumer> */}
         </MotionLazy>
       </ThemeProvider>
+      </FiltersContextProvider>
     </SettingsProvider>
     /* </AuthProvider> */
   );

@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types';
 // @mui
-import { useTheme } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+import {
+  Avatar,
+  Box,
+  Typography,
+  Stack,
+  AppBar,
+  Toolbar,
+  IconButton,
+  useTheme
+} from '@mui/material';
+
 // theme
 import { bgBlur } from 'src/theme/css';
 // hooks
@@ -15,7 +21,6 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
-import { Avatar, Box, Typography } from '@mui/material';
 import { useState } from 'react';
 import { _orders } from 'src/_mock/_order';
 import { AccountPopover, NotificationsPopover } from '../_common';

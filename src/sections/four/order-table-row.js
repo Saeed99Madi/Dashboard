@@ -11,7 +11,6 @@ import ListItemText from '@mui/material/ListItemText';
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
 import Iconify from 'src/components/iconify';
-// import { ConfirmDialog } from 'src/components/custom-dialog';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { Sentiment } from 'src/components/sentiment';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
@@ -28,8 +27,6 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
 
   const confirm = useBoolean();
 
-  // const collapse = useBoolean();  
-
   const popover = usePopover();
 
   const { themeLayout } = useSettingsContext()
@@ -45,7 +42,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   useEffect(() => {
     if (themeLayout === 'mini') {
       if (meetingReport.Analyzing) {
-        setDescription(`${meetingReport.description.slice(0, 23)} ...`)
+        setDescription(`${meetingReport.description.slice(0, 22)} ...`)
       }else if (meetingReport.description.length > 35) {
         setDescription(`${meetingReport.description.slice(0, 35)} ...`)
       } else {

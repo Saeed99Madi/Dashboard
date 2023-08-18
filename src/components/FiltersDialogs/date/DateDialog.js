@@ -56,6 +56,7 @@ export default function DateDialog({
           aria-labelledby="demo-radio-buttons-group-label"
           name="radio-buttons-group"
           fullWidth
+          value={value}
           sx={{
             width: '100%',
             display: 'flex',
@@ -131,7 +132,7 @@ export default function DateDialog({
                   }
                   
                   
-                }}value={startDate} onChange={onChangeStartDate} />
+                }}value={startDate || null} onChange={onChangeStartDate} />
               </Paper>
             </Box>
             <Box 
@@ -171,7 +172,7 @@ export default function DateDialog({
                     color: '#000',
                     fontWeight: 500
                   }
-                }} value={endDate} onChange={onChangeEndDate} />
+                }} value={endDate || null} onChange={onChangeEndDate} />
               </Paper>
             </Box>
 
@@ -195,7 +196,10 @@ export default function DateDialog({
               backgroundColor: '#E8E8EE',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => {
+              setValue('')
+              onClose()
+            }}
           >
             CANCEL
           </Button>
@@ -209,7 +213,9 @@ export default function DateDialog({
               color: '#fff',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => {
+              onClose('continue')
+            }}
           >
             CONTINUE
           </Button>
