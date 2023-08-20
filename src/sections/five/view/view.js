@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react';
+import { Card, Container } from '@mui/material';
 // src
 import { useSettingsContext } from 'src/components/settings';
 import { FiltersContext } from 'src/context/filtersContext';
