@@ -37,7 +37,6 @@ export function applyFilter({ inputData, comparator, filters, dateError }) {
     } else if (filters?.SortBy === 'Earlier created') {
       inputData = inputData.sort((a, b) => comparator(a.createdAt, b.createdAt));
     } else if (filters?.SortBy === 'Higher takeaways') {
-      console.log(inputData);
       inputData = inputData.sort((a, b) =>  b.takeaway - a.takeaway);
     } else if ( filters?.SortBy === 'Lowest takeaways') {
       inputData = inputData.sort((a, b) =>  a.takeaway - b.takeaway);
@@ -53,7 +52,6 @@ export function applyFilter({ inputData, comparator, filters, dateError }) {
   }
 
   if (filters?.Revenue.length) {
-    console.log(inputData);
     inputData = inputData.filter(
       (order) =>
         filters?.Revenue.includes(order.Revenue)
@@ -74,7 +72,6 @@ export function applyFilter({ inputData, comparator, filters, dateError }) {
         fDate(order.createdAt) === fDate(new Date())
       );
     } else if (filters?.Time === 'Last 7 days') {
-      console.log((fDate(new Date() - 7 * 24 * 60 * 60 * 1000)));
       inputData = inputData.filter(
         (order) =>
         fDate(order.createdAt) >= (fDate(new Date() - 7 * 24 * 60 * 60 * 1000))

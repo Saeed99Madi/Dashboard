@@ -17,6 +17,7 @@ export default function TakeawaysLabel({label}) {
         top: '2.5em',
         fontSize: '13px',
         padding: '.5em .5em',
+        p: '1.2em 1em 1em 1em',
       }}
     >
       <FiberManualRecordIcon sx={{ fontSize: '13px', mr: .5}}/>

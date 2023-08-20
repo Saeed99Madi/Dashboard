@@ -22,7 +22,6 @@ export default function TableHeadCustom({
   const settings = useSettingsContext();
 
   const isNavMini = settings.themeLayout === 'mini';
-  console.log(isNavMini);
 
   return (
     <TableHead sx={{

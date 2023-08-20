@@ -13,7 +13,6 @@ import NavItem from './nav-item';
 // ----------------------------------------------------------------------
 
 export default function NavList({ data, depth, hasChild, config }) {
-  console.log({ data, depth, hasChild, config });
   const navRef = useRef(null);
 
   const pathname = usePathname();

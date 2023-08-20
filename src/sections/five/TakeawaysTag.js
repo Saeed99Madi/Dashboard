@@ -6,16 +6,14 @@ import { CloseButton } from 'src/components/ShowingFiltersResult/Showing.styled'
 import Iconify from 'src/components/iconify/iconify';
 
 export default function TakeawaysTag({
-  label,
-  color,
-  bgColor
+  tag
 }) {
 
 
   return (
 
-  <CloseButton sx={{backgroundColor: bgColor, color, borderRadius: '4px', ml: '0.5em'}}>
-    {label}
+  <CloseButton sx={{backgroundColor: tag.bgColor, color: tag.color, borderRadius: '4px', ml: '0.5em'}}>
+    {tag.name}
   {/* onClick={handleOnCloseDateRange} */}
     <Iconify  icon="mingcute:close-line" />
   </CloseButton>
@@ -23,7 +21,5 @@ export default function TakeawaysTag({
 }
 
 TakeawaysTag.propTypes = {
-  label: PropTypes.string,
-  color: PropTypes.string,
-  bgColor: PropTypes.string
+  tag: PropTypes.object
 }

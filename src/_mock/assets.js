@@ -4,6 +4,27 @@ export const _id = [...Array(40)].map(
   (_, index) => `e99f09a7-dd88-49d5-b1c8-1daf80c2d7b${index + 1}`
 );
 
+
+export const _Reports = [
+  'User Interview on First Project',
+  'Customer Feedback on Second Project',
+]
+
+export const _labels = [
+  'Open',
+  'Closed',
+  'On-hold',
+]
+
+export const _Tags = [
+  {name: 'Deadline', color: '#832A5A', bgColor: '#F2DEEA'},
+  {name: 'Bug', color: '#82542A', bgColor: '#EDE4D3'},
+  {name: 'Website', color: '#A344B3', bgColor: '#E5D3ED'},
+  {name: 'Price', color: '#CCAD0B', bgColor: '#ECEDD3'},
+  {name: 'Mobile App', color: '#2B876C', bgColor: '#D3EDDC'},
+  {name: 'Feedback', color: '#2A7282', bgColor: '#D3EDED'},
+]
+
 export const _fullAddress = [
   '19034 Verna Unions Apt. 164 - Honolulu, RI / 87535',
   '1147 Rohan Drive Suite 819 - Burlington, VT / 82021',

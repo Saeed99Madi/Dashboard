@@ -11,12 +11,6 @@ import Takeaways from '../Takeaways';
 
 export default function FourView() {
   const settings = useSettingsContext();
-  const {filters} = useContext(FiltersContext);
-
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-
   return (
   <Container
     maxWidth={settings.themeStretch ? false : 'xl'}

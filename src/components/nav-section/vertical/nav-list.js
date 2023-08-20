@@ -45,7 +45,7 @@ export default function NavList({ data, depth, hasChild, config }) {
         onClick={
           data?.itemAction === 'create_project'
             ? () => {
-                console.log('saeeeeeeed');
+                // console.log('saeeeeeeed');
               }
             : handleToggle
         }

@@ -8,7 +8,8 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  useTheme
+  useTheme,
+  Button
 } from '@mui/material';
 
 // theme
@@ -104,6 +105,21 @@ export default function Header({ onOpenNav }) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1 }}
       >
+        <Button
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: .5,
+            backgroundColor: '#DDC756',
+            '&:hover': {
+            backgroundColor: '#DDC756',
+              
+            }
+          }}>
+          <img src='/public/assets/Crown.png' alt='Crown' />
+          UPGRADE
+        </Button>
         <NotificationsPopover />
         <AccountPopover />
       </Stack>

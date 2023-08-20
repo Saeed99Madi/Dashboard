@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 // @mui
 import { Card, Table, TableBody, TableContainer, Container } from '@mui/material';
 // src
@@ -106,7 +106,6 @@ const canReset =
   
   const handleCloseRevenueDialog = useCallback((type) => {
     openRevenueDialog.onFalse();
-    console.log(type.target.vale);
     if (type !== 'continue') {
     handleResetFilters();
     }
@@ -118,11 +117,6 @@ const canReset =
     handleResetFilters();
   }, [handleResetFilters, openSortByDialog])
   
-
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
-
   return (
     <Container
       maxWidth={settings.themeStretch ? false : 'xl'}

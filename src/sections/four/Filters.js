@@ -99,7 +99,7 @@ export default function Filters({
       <Button
         color="inherit"
         onClick={() => {
-          console.log('Author');
+          // console.log('Author');
         }}
         startIcon={
           <Iconify
@@ -128,7 +128,7 @@ export default function Filters({
       <Button
         color="inherit"
         onClick={() => {
-          console.log('Organization');
+          // console.log('Organization');
         }}
         startIcon={
           <Iconify
@@ -156,7 +156,7 @@ export default function Filters({
       <Button
         color="inherit"
         onClick={() => {
-          console.log('Sentiment');
+          // console.log('Sentiment');
         }}
         startIcon={
           <Iconify

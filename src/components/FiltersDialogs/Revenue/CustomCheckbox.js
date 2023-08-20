@@ -5,7 +5,6 @@ import { FiltersContext } from 'src/context/filtersContext';
 
 export default function CustomCheckbox({label, handleCheckboxChange}) {
   const {filters} = useContext(FiltersContext);
-  console.log(filters);
   return (
     <FormControlLabel
       sx={{
