@@ -18,6 +18,7 @@ import OrderTableRow from '../order-table-row';
 import TableEmptyRows from '../table-empty-rows';
 import TableNoData from '../table-no-data';
 import Filters from '../Filters';
+import TablePaginationCustom from '../TablePaginationCustom';
 
 // ----------------------------------------------------------------------
 
@@ -69,6 +70,7 @@ export default function FourView() {
     },
     [setFilters, table]
   );
+
 
 const canReset =
   !!filters.name || filters.status !== 'all' || (!!filters.startDate && !!filters.endDate);
@@ -172,16 +174,32 @@ const canReset =
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .map((row) => (
-                      <OrderTableRow
-                        key={row.id}
-                        row={row}
-                        selected={table.selected.includes(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
-                        onViewRow={() => handleViewRow(row.id)}
-                      />
-                    ))}
+                  {!table.dense ? 
+                    dataFiltered
+                    .slice(
+                      table.page * table.rowsPerPage,
+                      table.page * table.rowsPerPage + table.rowsPerPage
+                    )
+                      .map((row) => (
+                        <OrderTableRow
+                          key={row.id}
+                          row={row}
+                          selected={table.selected.includes(row.id)}
+                          onDeleteRow={() => handleDeleteRow(row.id)}
+                          onViewRow={() => handleViewRow(row.id)}
+                        />
+                      )) :
+                      dataFiltered
+                      .map((row) => (
+                        <OrderTableRow
+                          key={row.id}
+                          row={row}
+                          selected={table.selected.includes(row.id)}
+                          onDeleteRow={() => handleDeleteRow(row.id)}
+                          onViewRow={() => handleViewRow(row.id)}
+                        />
+                      ))
+                  }
 
                   <TableEmptyRows
                     height={denseHeight}
@@ -193,6 +211,16 @@ const canReset =
               </Table>
             </Scrollbar>
           </TableContainer>
+          <TablePaginationCustom
+            count={dataFiltered.length}
+            page={table.page}
+            rowsPerPage={table.rowsPerPage}
+            onPageChange={table.onChangePage}
+            onRowsPerPageChange={table.onChangeRowsPerPage}
+            //
+            dense={table.dense}
+            onChangeDense={table.onChangeDense}
+          />
         </Card>
     </Container>
   );
