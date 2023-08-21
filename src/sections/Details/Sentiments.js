@@ -3,8 +3,11 @@ import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { Box, Typography } from '@mui/material';
+import { useSettingsContext } from 'src/components/settings';
 
 export default function Sentiments() {
+  const { themeLayout } = useSettingsContext()
+
   return (
     <Box sx={{
       width: '100%',
@@ -29,9 +32,9 @@ export default function Sentiments() {
           fontSize: '14px',
         }}
       >
-        <SentimentNeutralIcon sx={{mr: .5, ml: -1}}/>
+        <SentimentNeutralIcon sx={{mr: .5, ml:themeLayout !== 'mini' ? -2 : -1}}/>
         Neutral
-        <span style={{marginLeft: '1.5em'}}>15%</span>
+        <span style={{marginLeft: themeLayout !== 'mini' ? '.5em' : '1.5em'}}>15%</span>
       </Typography>
       <Typography
         sx={{
@@ -47,9 +50,9 @@ export default function Sentiments() {
           fontSize: '14px',
         }}
       >
-        <SentimentSatisfiedAltIcon sx={{mr: .5, ml: -1}}/>
+        <SentimentSatisfiedAltIcon sx={{mr: .5, ml:themeLayout !== 'mini' ? -2 : -1}}/>
         Positive
-        <span style={{marginLeft: '1.5em'}}>75%</span>
+        <span style={{marginLeft: themeLayout !== 'mini' ? '.5em' : '1.5em'}}>75%</span>
       </Typography>
       <Typography
         sx={{
@@ -65,9 +68,9 @@ export default function Sentiments() {
           fontSize: '14px',
         }}
       >
-        <SentimentVeryDissatisfiedIcon sx={{mr: .5, ml: -1}}/>
+        <SentimentVeryDissatisfiedIcon sx={{mr: .5, ml:themeLayout !== 'mini' ? -2 : -1}}/>
         Negative
-        <span style={{marginLeft: '1.5em'}}>75%</span>
+        <span style={{marginLeft: themeLayout !== 'mini' ? '.5em' : '1.5em'}}>75%</span>
       </Typography>
     </Box>
   )
