@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export default function TakeawayComment({comment}) {
+export default function TakeawayComment({comment, Details}) {
   return (
     <Box
     sx={{
@@ -21,7 +21,7 @@ export default function TakeawayComment({comment}) {
           p: 1,
           width: '100%',
           color: 'black',
-          backgroundColor: '#F6F7F8',
+          backgroundColor: Details ? '#fff' : '#F6F7F8',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'flex-start',
@@ -32,5 +32,6 @@ export default function TakeawayComment({comment}) {
 };
 
 TakeawayComment.propTypes = {
-  comment: PropTypes.object
+  comment: PropTypes.object,
+  Details: PropTypes.bool
 }

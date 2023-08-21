@@ -3,10 +3,11 @@ import { Avatar, Box, Button, Card, Typography } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import ChatIcon from '@mui/icons-material/Chat';
+import AddIcon from '@mui/icons-material/Add';
 import PropTypes from 'prop-types'
-import TakeawaysTag from './TakeawaysTag';
-import TakeawaysLabel from './TakeawaysLabel';
-import TakeawayComment from './TakeawayComment';
+import TakeawaysTag from '../five/TakeawaysTag';
+import TakeawayComment from '../five/TakeawayComment';
+import TakeawaysLabel from '../five/TakeawaysLabel';
 
 export default function Takeaway({takeaway}) {
   const [showComments, setShowComments] = useState(false);
@@ -20,14 +21,31 @@ export default function Takeaway({takeaway}) {
     flexDirection: 'column',
     gap: 1,
     position: 'relative',
+    border: 'none !important',
+    backgroundColor: '#F6F7F8',
   }}
   >
+  <Typography sx={{mt: 5, ml: 1}}>{takeaway.description}</Typography>
   <Box sx={{ml: -.7}}>
     {takeaway.Tags.length > 0 && takeaway.Tags.map((tag) => (
       <TakeawaysTag key={tag} tag={tag} />
     ))}
+      <Button sx={{
+      color: '#7E8695',
+      fontSize: '14px',
+      backgroundColor: 'transparent',
+      border: '1px solid #7E8695',
+      p: '.2em .5em',
+      borderRadius: '4px',
+      m: 1,
+      '&:hover': {
+        backgroundColor: 'transparent',
+      }
+    }}>
+      <AddIcon/>
+      add label
+    </Button>
   </Box>
-  <Typography>{takeaway.description}</Typography>
   <Box sx={{
     display: 'flex',
     alignItems: 'center',
@@ -37,25 +55,6 @@ export default function Takeaway({takeaway}) {
   }}>
       <Avatar src={takeaway.Author.avatarUrl} alt={takeaway.Author.name} sx={{ width: 32, height: 32 }}/>
       <Typography>{takeaway.Author.name}</Typography>
-      <Box
-        // onClick={onViewRow}
-        sx={{
-          cursor: 'pointer',
-          '&:hover': {
-            textDecoration: 'underline',
-          },
-          display: 'flex',
-          alignItems: 'center',
-          gap: .5,
-          justifyContent: 'flex-start',
-          opacity: .6,
-        }}
-      >
-      <img src={takeaway.Report.icon} alt='img' />
-      {takeaway.Report.Report}
-      <Typography sx={{mb: 1.3, fontSize: '20px'}}>.</Typography>
-      <Typography>{takeaway.Report.time}</Typography> 
-    </Box>
   </Box>
   <Box sx={{
     display: 'flex',
@@ -71,7 +70,7 @@ export default function Takeaway({takeaway}) {
       fontSize: '13px',
       borderRadius: '50px',
       gap: .8,
-      padding: '.3em 1em',
+      padding: '.5em 1em',
       '&:hover': {
         backgroundColor: '#1a2638e3'
       },
@@ -91,7 +90,7 @@ export default function Takeaway({takeaway}) {
       backgroundColor: 'transparent',
       fontSize: '13px',
       borderRadius: '50px',
-      padding: '.2em 1em',
+      padding: '.3em 1em',
       ml: 1,
       gap: .8,
       border: '1px solid #1A2638',
@@ -115,13 +114,13 @@ export default function Takeaway({takeaway}) {
 
     {showComments && takeaway.comments.length > 1 &&
       takeaway.comments.slice(0, takeaway.comments.length - 1).map((comment) => (
-        <TakeawayComment key={takeaway.id} comment={comment} />
+        <TakeawayComment Details key={takeaway.id} comment={comment} />
       ))
 
     }
 
     {takeaway.comments.length > 0 &&
-      <TakeawayComment key={takeaway.id} comment={takeaway.comments[takeaway.comments.length - 1]} />}
+      <TakeawayComment Details key={takeaway.id} comment={takeaway.comments[takeaway.comments.length - 1]} />}
     <MoreHorizIcon
         sx={{
           position: 'absolute',
@@ -131,7 +130,7 @@ export default function Takeaway({takeaway}) {
           cursor: 'pointer',
         }}
     />
-    <TakeawaysLabel label={takeaway.label}/>
+    <TakeawaysLabel Details label={takeaway.label}/>
   </Card>
   )
 }
