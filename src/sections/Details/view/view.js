@@ -1,6 +1,5 @@
-import { Box, Card, Container, Typography } from '@mui/material';
+import { Box} from '@mui/material';
 // src
-import { useSettingsContext } from 'src/components/settings';
 import DetailsSection from '../DetailsSection';
 import TakeawaysSection from '../TakeawaysSection';
 
