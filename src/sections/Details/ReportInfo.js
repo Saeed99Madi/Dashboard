@@ -11,7 +11,6 @@ import { format } from 'date-fns';
 
 export default function ReportInfo({details}) {
   const [showParticipants, setShowParticipants] = useState(false);
-  console.log(format(details.time, 'hh'));
   return (
     <Card sx={{p: '1.5em 1em', mt: 2, backgroundColor: '#F6F7F8'}}>
       <Box
