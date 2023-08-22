@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 // theme
+import { useLocation, useParams } from 'react-router';
 import { bgBlur } from 'src/theme/css';
 // hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -22,8 +23,9 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { _orders } from 'src/_mock/_order';
+import { _mockDetails } from 'src/_mock/-mockDetails';
 import { AccountPopover, NotificationsPopover } from '../_common';
 import { HEADER, NAV } from '../config-layout';
 
@@ -31,7 +33,10 @@ import { HEADER, NAV } from '../config-layout';
 
 export default function Header({ onOpenNav }) {
   const [tableData] = useState(_orders);
-
+  const {id} = useParams()
+  const [ details ] = useState(_mockDetails[id])
+  const {pathname} = useLocation();
+  const [isDetails, setIsDetails] = useState(false);
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -46,6 +51,13 @@ export default function Header({ onOpenNav }) {
 
   const offsetTop = offset && !isNavHorizontal;
   
+  useEffect(() => {
+    if (pathname.includes('/details/')) {
+      setIsDetails(true);
+    }else {
+      setIsDetails(false);
+    }
+  }, [pathname])
 
   const renderContent = (
     <>
@@ -57,6 +69,29 @@ export default function Header({ onOpenNav }) {
         </IconButton>
       )}
 
+      {isDetails ? 
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          ml: 2,
+          gap: 2
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: 600,
+            backgroundColor: details.Published ? '#4FB54D' : '#ff000073',
+            color: '#fff',
+            padding: '.3em 1em',
+            borderRadius: '50px',
+          }}
+        >
+          {details.Published ? 'Published' : 'Draft'}
+        </Typography>
+        <Typography variant='h6' >{details.title}</Typography>
+      </Box> :  
       <Box 
         sx={{
           display: 'flex',
@@ -96,7 +131,7 @@ export default function Header({ onOpenNav }) {
         >
           <img src='/public/assets/Vector.png' alt='' />
         </Box>
-      </Box>
+      </Box>}
 
       <Stack
         flexGrow={1}

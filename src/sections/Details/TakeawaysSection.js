@@ -49,7 +49,7 @@ export default function TakeawaysSection() {
           backgroundColor: 'white',
         }}
       >
-        Takeaways (16)
+        Takeaways ({takeaways.length})
       </Typography>
       <Button 
         sx={{
