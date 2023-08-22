@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
-export default function Summary() {
+export default function Summary({summary}) {
   return (
     <Box sx={{mt: 2}}>
       <Typography variant="h6">Summary</Typography>
@@ -10,9 +11,12 @@ export default function Summary() {
         fontSize: '15.5px',
         mt: 1
       }}>
-        Vestibulum aliquet pharetra pellentesque habitasse nunc quis varius. Euismod dignissim porta sit fermentum tellus placerat purus tellus. Id est sagittis purus montes sed elit sit a tempus. Elit convallis arcu accumsan magna eget. Amet nullam adipiscing morbi in a. Dignissim bibendum pellentesque.
-        Elit convallis arcu accumsan 
+        {summary}
       </Typography>
     </Box>
   )
+}
+
+Summary.propTypes = {
+  summary: PropTypes.string
 }

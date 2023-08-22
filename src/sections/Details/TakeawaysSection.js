@@ -102,7 +102,7 @@ export default function TakeawaysSection() {
         Takeaways
       </Typography>
       {takeaways.length > 0 && takeaways.map((takeaway) => (
-      <Takeaway takeaway={takeaway} key={takeaway.id}/>
+      <Takeaway takeaway={takeaway} key={takeaway.id * 2}/>
     ))}
     <Box sx={{
        position: 'sticky',

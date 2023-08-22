@@ -27,8 +27,8 @@ export default function Takeaway({takeaway}) {
   >
   <Typography sx={{mt: 5, ml: 1}}>{takeaway.description}</Typography>
   <Box sx={{ml: -.7}}>
-    {takeaway.Tags.length > 0 && takeaway.Tags.map((tag) => (
-      <TakeawaysTag key={tag} tag={tag} />
+    {takeaway.Tags.length > 0 && takeaway.Tags.map((tag, i) => (
+      <TakeawaysTag key={i} tag={tag} />
     ))}
       <Button sx={{
       color: '#7E8695',
@@ -120,7 +120,7 @@ export default function Takeaway({takeaway}) {
     }
 
     {takeaway.comments.length > 0 &&
-      <TakeawayComment Details key={takeaway.id} comment={takeaway.comments[takeaway.comments.length - 1]} />}
+      <TakeawayComment Details comment={takeaway.comments[takeaway.comments.length - 1]} />}
     <MoreHorizIcon
         sx={{
           position: 'absolute',

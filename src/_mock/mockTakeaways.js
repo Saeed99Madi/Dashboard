@@ -38,6 +38,7 @@ export const _mockTakeaways = [...Array(20)].map((_, index) => {
     comments,
     vote,
     label,
-    Tags
+    Tags,
+    id: index
   };
 });

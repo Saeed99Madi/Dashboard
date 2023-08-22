@@ -1,14 +1,20 @@
-import React from 'react'
-import { Card, Container } from '@mui/material'
-import CardAudio from './CardAudio'
-import ReportInfo from './ReportInfo'
-import Summary from './Summary'
-import LoremIpsum from './LoremIpsum'
-import Keywords from './Keywords'
-import Transcripts from './Transcripts'
+import React, { useState } from 'react';
+import { useParams } from 'react-router';
+
+import { Card, Container } from '@mui/material';
+import { _mockDetails } from 'src/_mock/-mockDetails';
+
+import CardAudio from './CardAudio';
+import ReportInfo from './ReportInfo';
+import Summary from './Summary';
+import LoremIpsum from './LoremIpsum';
+import Keywords from './Keywords';
+import Transcripts from './Transcripts';
 
 
 export default function DetailsSection() {
+  const {id} = useParams()
+  const [ details ] = useState(_mockDetails[id])
   return (
     <Container
     maxWidth='65%'
@@ -23,11 +29,11 @@ export default function DetailsSection() {
   >
     <Card sx={{ m: '0 -1em', p: '2em 1.5em' }}>
       <CardAudio/>
-      <ReportInfo/>
-      <Summary/>
-      <LoremIpsum/>
-      <Keywords/>
-      <Transcripts/>
+      <ReportInfo details={details}/>
+      <Summary summary={details.summary}/>
+      <LoremIpsum loremIpsum={details.LoremIpsum}/>
+      <Keywords keywords={details.Keywords}/>
+      <Transcripts transcripts={details.transcripts}/>
       </Card>
   </Container>
   )

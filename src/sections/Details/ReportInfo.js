@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Button, Card, Typography } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -6,8 +7,11 @@ import GroupIcon from '@mui/icons-material/Group';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import AddIcon from '@mui/icons-material/Add';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { format } from 'date-fns';
 
-export default function ReportInfo() {
+export default function ReportInfo({details}) {
+  const [showParticipants, setShowParticipants] = useState(false);
+  console.log(format(details.time, 'hh'));
   return (
     <Card sx={{p: '1.5em 1em', mt: 2, backgroundColor: '#F6F7F8'}}>
       <Box
@@ -71,7 +75,9 @@ export default function ReportInfo() {
         justifyContent: 'space-between',
         mt: 1
       }}>
-      <Typography sx={{fontSize: '23.5px', fontWeight: 'bold'}}>Quarterly Business Review (QBR) for Unilevel - June 2023</Typography>
+      <Typography sx={{fontSize: '23.5px', fontWeight: 'bold'}}>
+        {details.title}
+      </Typography>
       <Button sx={{
         backgroundColor: 'transparent',
         '&:hover': {
@@ -81,7 +87,9 @@ export default function ReportInfo() {
         <MoreHorizIcon/>
       </Button>
       </Box>
-      <Typography>Discussion about whether our platform has been helping our client</Typography>
+      <Typography>
+        {details.description}
+      </Typography>
       <Button sx={{
         mt: 1,
         ml: -1,
@@ -91,14 +99,23 @@ export default function ReportInfo() {
           backgroundColor: 'transparent',
           color: '#586474',
       }
-      }}>
-      <GroupIcon/>
-      4 participants
-      <ExpandLessIcon/>
+      }}
+      onClick={() => setShowParticipants(!showParticipants)}
+      >
+      <GroupIcon sx={{mr: .5}}/>
+      {details.participants.length} participants
+      <ExpandLessIcon sx={{ml: .5}}/>
       </Button>
-      <Typography sx={{fontWeight: 'bold', fontSize: '14.4px', mt: 1}}>Robert Arthur <span style={{color: '#7E8695', marginLeft: '.3em'}}>General Manager</span></Typography>
-      <Typography sx={{fontWeight: 'bold', fontSize: '14.4px', mt: 1}}>John F Kennedy<span style={{color: '#7E8695', marginLeft: '.3em'}}>Lead Sales Manager</span></Typography>
-      <Typography sx={{fontWeight: 'bold', fontSize: '14.4px', mt: 1}}>Thomas Shelby<span style={{color: '#7E8695', marginLeft: '.3em'}}>Accounting Staff</span></Typography>
+      {showParticipants && 
+        details.participants.length > 0 &&
+         details.participants.map(participant => (
+      <Typography key={participant.id} sx={{fontWeight: 'bold', fontSize: '14.4px', mt: 1}}>
+          {participant.name} 
+        <span style={{color: '#7E8695', marginLeft: '.3em'}}>
+        {participant.jop} 
+        </span>
+      </Typography>
+      ))}
       <Button sx={{
         fontSize: '13.4px',
         mt: 1,
@@ -114,12 +131,17 @@ export default function ReportInfo() {
         <AddIcon/>
       </Button>
       <Typography sx={{color: '#586474', fontSize: '13.4px', mt: 1}}>
-        12 Jun 2023
+        {format(details.time, 'dd/M/yyyy')}
+        {/* 12 Jun 2023 */}
         <FiberManualRecordIcon sx={{fontSize: '6px', m: '.3em 1em'}}/>
-        2h 16m
+        {`${format(details.time, 'h')}h ${format(details.time, 'mm')}m`}
         <FiberManualRecordIcon sx={{fontSize: '6px', m: '.3em 1em'}} />
-        <span style={{color: '#6EA9EE'}}>by Arthur Graham</span>
+        <span style={{color: '#6EA9EE'}}>by {details.Author}</span>
       </Typography>
     </Card>
   )
+}
+
+ReportInfo.propTypes = {
+  details: PropTypes.object
 }

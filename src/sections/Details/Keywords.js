@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import PropTypes from 'prop-types';
 
-export default function Keywords() {
+export default function Keywords({keywords}) {
   return (
     <Box sx={{
       pb: 3,
@@ -12,9 +13,12 @@ export default function Keywords() {
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
-        gap: 1
+        gap: 1,
+        mt: 1,
+        flexWrap: 'wrap',
       }}>
-        <Typography sx={{
+        {keywords.length > 0 && keywords.map((keyword) => (
+        <Typography key={keyword.id} sx={{
           color: '#6EA9EE',
           fontSize: '14px',
           backgroundColor: '#E2F0FD',
@@ -23,8 +27,9 @@ export default function Keywords() {
           borderRadius: '50px',
           fontWeight: 'bold'
         }}>
-          deadline
+          {keyword.text}
         </Typography>
+        ))}
         <Button sx={{
           backgroundColor: 'transparent',
           color: '#7E8695',
@@ -42,4 +47,8 @@ export default function Keywords() {
       </Box>
     </Box>
   )
+}
+
+Keywords.propTypes = {
+  keywords: PropTypes.array
 }
