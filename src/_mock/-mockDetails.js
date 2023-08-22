@@ -51,6 +51,8 @@ export const _mockDetails = [...Array(20)].map((_, index) => {
    
   const Author = _fullNames[index]
 
+  const Published = index % 2 === 0 
+
   return {
     id,
     title,
@@ -62,5 +64,6 @@ export const _mockDetails = [...Array(20)].map((_, index) => {
     Keywords,
     transcripts,
     Author,
+    Published: !Published,
   };
 });
