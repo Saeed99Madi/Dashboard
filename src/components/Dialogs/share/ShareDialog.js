@@ -6,14 +6,31 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import PropTypes from 'prop-types';
-import { Typography } from '@mui/material';
-
+import { Box, FormControl, MenuItem, Select, Typography } from '@mui/material';
+import {BiSolidDownArrow} from 'react-icons/bi';
+import Emails from './Emails';
 
 const Transition = forwardRef((props, ref) => <Slide direction="down" ref={ref} {...props} />);
 
 export default function ShareDialog({open, onClose}) {
+  const [emails, setEmails] = React.useState([]);
+  const [validationError, setValidationError] = React.useState(false)
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
+  const addEmail = (e) => {
+    if (e.key === 'Enter') {
+      if (emailRegex.test(e.target.value)){
+        setEmails([...emails, e.target.value])
+        e.target.value = '';
+      } else {
+        setValidationError(true)
+      }
+    }
+  }
 
+  const removeEmail = (index) => {
+    setEmails(emails.filter((email, i) => i !== index))
+  }
   return (
       <Dialog
         open={open}
@@ -22,10 +39,82 @@ export default function ShareDialog({open, onClose}) {
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>Revenue</DialogTitle>
-        <DialogContent>
+        <DialogTitle sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize: '32px',
+          p: '1.5em 0'
+        }}>Share report</DialogTitle>
+        <DialogContent sx={{width:'35em', padding: '2.5em'}}>
 
-            <Typography>Share</Typography>
+            <Typography sx={{
+              width: '100%',
+              borderRadius: '4px',
+              fontWeight: 500
+            }}>Share report</Typography>
+            <Box sx={{
+              width: '100%',
+              border: '1px solid #D6D8E1',
+              height: '3em',
+              borderRadius: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '.5em'
+            }}>
+              <input style={{
+                width: '80%',
+                border: 'none',
+                outline: 'none',
+                fontSize: '16px',
+                }}
+                type='email'
+                placeholder='insert email address'
+                onKeyDown={addEmail}
+                onChange={() => setValidationError(false)}
+              />
+              <FormControl 
+                sx={{
+                  m: 1,
+                  height: '3em',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  defaultValue='Viewer'
+                  sx={{
+                    '& .MuiSelect-select.MuiInputBase-input': {
+                      backgroundColor: 'transparent',
+                    }
+                  }}
+                  variant='standard'
+                  disableUnderline
+                  IconComponent={() => (
+                    <BiSolidDownArrow />
+                  )}
+
+                >
+                  <MenuItem value='Viewer'>Viewer</MenuItem>
+                  <MenuItem value='Admin'>Admin</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            {validationError &&
+              <Typography sx={{
+                color: 'red',
+                fontSize: '12px',
+                pl: 1
+              }}>
+                Please add a valid email
+              </Typography>
+            }
+            <Emails emails={emails} removeEmail={removeEmail}/>
       </DialogContent>
         <DialogActions sx={{borderTop: '1px solid #f0f2f4', paddingTop: '1em'}}>
           <Button
@@ -51,11 +140,12 @@ export default function ShareDialog({open, onClose}) {
               padding: '10px, 15px',
               backgroundColor: '#2292F9',
               color: '#fff',
-              fontWeight: 200
+              fontWeight: 200,
             }} 
             onClick={() => {
               onClose('continue')
             }}
+            disabled={emails.length === 0}
           >
             CONTINUE
           </Button>
