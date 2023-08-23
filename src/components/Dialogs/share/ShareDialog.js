@@ -33,7 +33,7 @@ export default function ShareDialog({open, onClose}) {
   }
   return (
       <Dialog
-        open={open}
+        open={true || open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
@@ -47,7 +47,7 @@ export default function ShareDialog({open, onClose}) {
           fontSize: '32px',
           p: '1.5em 0'
         }}>Share report</DialogTitle>
-        <DialogContent sx={{width:'35em', padding: '2.5em'}}>
+        <DialogContent sx={{width:'35em', padding: '3em'}}>
 
             <Typography sx={{
               width: '100%',
@@ -116,11 +116,11 @@ export default function ShareDialog({open, onClose}) {
             }
             <Emails emails={emails} removeEmail={removeEmail}/>
       </DialogContent>
-        <DialogActions sx={{borderTop: '1px solid #f0f2f4', paddingTop: '1em'}}>
+        <DialogActions sx={{ mt: -3, width: '100%', p: '0 3em 2em 3em'}}>
           <Button
             sx={{
-              width: '120px',
-              height: '40px',
+              width: '50%',
+              height: '45px',
               borderRadius: '6px',
               padding: '10px, 15px',
               backgroundColor: '#E8E8EE',
@@ -134,8 +134,8 @@ export default function ShareDialog({open, onClose}) {
           </Button>
           <Button
             sx={{
-              width: '120px',
-              height: '40px',
+              width: '50%',
+              height: '45px',
               borderRadius: '6px',
               padding: '10px, 15px',
               backgroundColor: '#2292F9',

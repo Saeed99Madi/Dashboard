@@ -11,7 +11,7 @@ export default function Emails({emails, removeEmail}) {
       alignItems: 'center',
       gap: 1,
       flexWrap: 'wrap',
-      p: '1em 0'
+      p: '1em 0 0 0',
     }}
   >
     {emails.length > 0 && emails.map((email, index) => (
