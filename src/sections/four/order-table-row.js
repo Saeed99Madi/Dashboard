@@ -17,7 +17,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import {  useSettingsContext } from 'src/components/settings/context/settings-context';
-import { ParticipantPopup } from 'src/components/FiltersDialogs';
+import { ParticipantPopup } from 'src/components/Dialogs';
 
 // ----------------------------------------------------------------------
 

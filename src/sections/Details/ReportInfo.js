@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { format } from 'date-fns';
 
-export default function ReportInfo({details}) {
+export default function ReportInfo({details, setOpenShareDialog}) {
   const [showParticipants, setShowParticipants] = useState(false);
   return (
     <Card sx={{p: '1.5em 1em', mt: 2, backgroundColor: '#F6F7F8'}}>
@@ -62,7 +62,9 @@ export default function ReportInfo({details}) {
             backgroundColor: '#D8EBFD',
             color: '#2292F9',
           }
-        }}>
+        }}
+          onClick={() => setOpenShareDialog(true)}
+        >
           <ShareIcon/>
           Share
         </Button>
@@ -142,5 +144,6 @@ export default function ReportInfo({details}) {
 }
 
 ReportInfo.propTypes = {
-  details: PropTypes.object
+  details: PropTypes.object,
+  setOpenShareDialog: PropTypes.func
 }

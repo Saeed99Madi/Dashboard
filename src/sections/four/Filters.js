@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 // components
 import Iconify from 'src/components/iconify';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
-import { CreateDialog, DateDialog, RevenueDialog, SortByDialog } from 'src/components/FiltersDialogs';
+import { CreateDialog, DateDialog, RevenueDialog, SortByDialog } from 'src/components/Dialogs';
 // ----------------------------------------------------------------------
 
 export default function Filters({
