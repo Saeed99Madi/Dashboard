@@ -33,7 +33,7 @@ export default function ShareDialog({open, onClose}) {
   }
   return (
       <Dialog
-        open={true || open}
+        open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
