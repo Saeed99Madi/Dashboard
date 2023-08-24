@@ -18,11 +18,16 @@ import { bgBlur } from 'src/theme/css';
 // hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
+
+import {HiPlus} from 'react-icons/hi';
+
 // components
 import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
+import {PiCrownSimpleFill} from 'react-icons/pi';
+
 import { useEffect, useState } from 'react';
 import { _orders } from 'src/_mock/_order';
 import { _mockDetails } from 'src/_mock/-mockDetails';
@@ -129,7 +134,7 @@ export default function Header({ onOpenNav }) {
             cursor: 'pointer',
           }}
         >
-          <img src='/public/assets/Vector.png' alt='' />
+          <HiPlus style={{color: '#2292f9'}}/>
         </Box>
       </Box>}
 
@@ -152,7 +157,7 @@ export default function Header({ onOpenNav }) {
               
             }
           }}>
-          <img src='/public/assets/Crown.png' alt='Crown' />
+          <PiCrownSimpleFill />
           UPGRADE
         </Button>
         <NotificationsPopover />

@@ -51,7 +51,7 @@ export default function Takeaway({takeaway}) {
           opacity: .6,
         }}
       >
-      <img src={takeaway.Report.icon} alt='img' />
+      {takeaway.Report.icon}
       {takeaway.Report.Report}
       <Typography sx={{mb: 1.3, fontSize: '20px'}}>.</Typography>
       <Typography>{takeaway.Report.time}</Typography> 

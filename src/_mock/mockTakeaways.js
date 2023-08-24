@@ -1,12 +1,14 @@
 import { random } from 'lodash';
+import { BsFillMicFill } from 'react-icons/bs';
+import {RiFileList2Fill} from 'react-icons/ri';
 import { _mock } from './_mock';
 import { _Reports, _Tags, _fullNames, _labels, _postTitles, _sentences } from './assets';
 
 export const _mockTakeaways = [...Array(20)].map((_, index) => {
   const description = _postTitles[index];
   const Report = index % 2 === 0 ?
-    {Report:_Reports[0], icon: '/public/assets/mic.png', time: '3:23'} :
-    {Report:_Reports[1], icon: '/public/assets/data.png', time: '5:23'}
+    {Report:_Reports[0], icon: <BsFillMicFill/>, time: '3:23'} :
+    {Report:_Reports[1], icon: <RiFileList2Fill/>, time: '5:23'}
 
   const Author = {
     id: index,

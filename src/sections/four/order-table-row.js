@@ -18,6 +18,7 @@ import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import {  useSettingsContext } from 'src/components/settings/context/settings-context';
 import { ParticipantPopup } from 'src/components/Dialogs';
+import {BiFile} from 'react-icons/bi';
 
 // ----------------------------------------------------------------------
 
@@ -76,7 +77,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
             opacity: meetingReport.Analyzing ? 0.5 : 1,
           }}
         >
-          <img src={meetingReport.icon} alt='img' />
+          {meetingReport.icon}
           {description}
           {meetingReport.Analyzing && <Typography sx={{
             backgroundColor: '#FBDBAC',
@@ -139,7 +140,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
             width: '100%',
             color: '#7E8695'
           }}>
-          <img src='/public/assets/file.svg' alt='file'/>
+          <BiFile/>
           {takeaway}
           </Box>
       </TableCell>
