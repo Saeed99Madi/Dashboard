@@ -20,11 +20,42 @@ export const FiltersContextProvider = ({children}) => {
     setFilters(defaultFilters);
   }, []);
 
+  const handleResetDateRange = useCallback(() => {
+    setFilters((prevState) => ({
+      ...prevState,
+      startDate: '',
+      endDate: '',
+      Time: '',
+    }));
+  }, []);
+
+  const handleCloseRevenueDialog = useCallback(() => {
+    setFilters((prevState) => ({
+      ...prevState,
+      Revenue: [],
+    }));
+  }, []);
+
+  const handleCloseSortBy = useCallback(() => {
+    setFilters((prevState) => ({
+      ...prevState,
+      SortBy: '',
+    }));
+  }, [])
+
   const values = useMemo(() => ({
     filters,
     setFilters,
     handleResetFilters,
-  }), [filters, handleResetFilters]);
+    handleResetDateRange,
+    handleCloseRevenueDialog,
+    handleCloseSortBy
+  }), [filters,
+    handleResetFilters,
+    handleResetDateRange,
+    handleCloseRevenueDialog,
+    handleCloseSortBy,
+  ]);
 
   return (
     <FiltersContext.Provider value={values}>

@@ -13,8 +13,10 @@ import CustomOption from './CustomOption';
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function SortByDialog({open, onClose, onFilters}) {
+  const [radioValue, setRadioValue] = React.useState('');
   const handleSortBy = (e) => {
     onFilters('SortBy' , e.target.value)
+    setRadioValue(e.target.value)
   }
 
   return (
@@ -46,6 +48,7 @@ export default function SortByDialog({open, onClose, onFilters}) {
             }
           }}
           onChange={handleSortBy}
+          value={radioValue}
           >
 
           <CustomOption label="Latest created" />
@@ -68,7 +71,10 @@ export default function SortByDialog({open, onClose, onFilters}) {
               backgroundColor: '#E8E8EE',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => {
+              onClose()
+              setRadioValue('')
+            }}
           >
             CANCEL
           </Button>
@@ -82,7 +88,7 @@ export default function SortByDialog({open, onClose, onFilters}) {
               color: '#fff',
               fontWeight: 200
             }} 
-            onClick={onClose}
+            onClick={() => onClose('continue')}
           >
             CONTINUE
           </Button>

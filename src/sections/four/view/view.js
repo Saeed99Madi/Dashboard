@@ -36,7 +36,12 @@ const TABLE_HEAD = [
 export default function FourView() {
   const table = useTable({ defaultOrderBy: 'orderNumber' });
   const settings = useSettingsContext();
-  const {filters, setFilters, handleResetFilters} = useContext(FiltersContext);
+  const {filters,
+    setFilters,
+    handleResetDateRange,
+    handleCloseRevenueDialog,
+    handleCloseSortBy
+  } = useContext(FiltersContext);
   const [tableData, setTableData] = useState(_orders);
 
   const router = useRouter();
@@ -97,25 +102,28 @@ const canReset =
     [router]
   );
 
+
   const handleOnCloseDateRange = useCallback((type) => {
     openDateRange.onFalse();
     if (type !== 'continue') {
-      handleResetFilters();
+      handleResetDateRange();
     }
-  }, [handleResetFilters, openDateRange]);
+  }, [handleResetDateRange, openDateRange]);
   
-  const handleCloseRevenueDialog = useCallback((type) => {
+  const handleCloseRevenue = useCallback((type) => {
     openRevenueDialog.onFalse();
     if (type !== 'continue') {
-    handleResetFilters();
+      handleCloseRevenueDialog();
     }
-  }, [handleResetFilters, openRevenueDialog]
+  }, [handleCloseRevenueDialog, openRevenueDialog]
   );
 
-  const handleCloseSortByDialog = useCallback(() => {
+  const handleCloseSortByDialog = useCallback((type) => {
     openSortByDialog.onFalse();
-    handleResetFilters();
-  }, [handleResetFilters, openSortByDialog])
+    if (type !== 'continue') {
+      handleCloseSortBy();
+    }
+  }, [handleCloseSortBy, openSortByDialog])
   
   return (
     <Container
@@ -132,7 +140,7 @@ const canReset =
           onCloseDateRange={handleOnCloseDateRange}
           onOpenDateRange={openDateRange.onTrue}
           openRevenueDialog={openRevenueDialog.value}
-          onCloseRevenueDialog={handleCloseRevenueDialog}
+          onCloseRevenueDialog={handleCloseRevenue}
           onOpenRevenueDialog={openRevenueDialog.onTrue}
           openSortByDialog={openSortByDialog.value}
           onOpenSortByDialog={openSortByDialog.onTrue}
@@ -147,7 +155,7 @@ const canReset =
         />
           <ShowingFiltersResult
             handleOnCloseDateRange={handleOnCloseDateRange}
-            handleOnCloseRevenue={handleCloseRevenueDialog}
+            handleOnCloseRevenue={handleCloseRevenue}
           />
           <TableContainer
             sx={{
