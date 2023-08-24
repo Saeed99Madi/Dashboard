@@ -7,6 +7,8 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 // components
 import Iconify from 'src/components/iconify';
+import { SortByDialog } from 'src/components/Dialogs';
+import { useState } from 'react';
 // ----------------------------------------------------------------------
 
 export default function Filters({
@@ -15,12 +17,18 @@ export default function Filters({
   
 }) {
   
+  const [openSortBy, setOpenSortBy] = useState(false);
 
+  const handleOpenSortBy = () => {
+    setOpenSortBy(true);
+  }
+
+  const handleCloseSortBy = () => {
+    setOpenSortBy(false);
+  }
 
   const renderFilterName = (
     <TextField
-      // value={filters.name}
-      // onChange={handleFilterName}
       placeholder="Search..."
       InputProps={{
         sx: {
@@ -106,15 +114,13 @@ export default function Filters({
 
       <Button
         color="inherit"
-        onClick={() => {
-          // console.log('Sentiment');
-        }}
         startIcon={
           <Iconify
             icon={openDateRange ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
             sx={{ ml: -0.5 }}
           />
         }
+        onClick={handleOpenSortBy}
       >
           Sort
       </Button>
@@ -134,6 +140,8 @@ export default function Filters({
         {renderFilterDate}
 
       </Stack>
+      <SortByDialog onFilters={onFilters} open={openSortBy} onClose={handleCloseSortBy} />
+
     </Stack>
   );
 }
