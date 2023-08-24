@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, Card, Typography } from '@mui/material'
 import ShareIcon from '@mui/icons-material/Share';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import GroupIcon from '@mui/icons-material/Group';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import AddIcon from '@mui/icons-material/Add';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { format } from 'date-fns';
+import NestedList from './NestedList';
 
-export default function ReportInfo({details, setOpenShareDialog}) {
+export default function ReportInfo({details, setOpenShareDialog, handleOpenEditSide}) {
   const [showParticipants, setShowParticipants] = useState(true);
   return (
     <Card sx={{p: '1.5em 1em', mt: 2, backgroundColor: '#F6F7F8'}}>
@@ -79,14 +79,7 @@ export default function ReportInfo({details, setOpenShareDialog}) {
       <Typography sx={{fontSize: '23.5px', fontWeight: 'bold'}}>
         {details.title}
       </Typography>
-      <Button sx={{
-        backgroundColor: 'transparent',
-        '&:hover': {
-          backgroundColor: 'transparent',
-        }
-      }}>
-        <MoreHorizIcon/>
-      </Button>
+        <NestedList handleOpenEditSide={handleOpenEditSide} />
       </Box>
       <Typography>
         {details.description}
@@ -145,5 +138,6 @@ export default function ReportInfo({details, setOpenShareDialog}) {
 
 ReportInfo.propTypes = {
   details: PropTypes.object,
-  setOpenShareDialog: PropTypes.func
+  setOpenShareDialog: PropTypes.func,
+  handleOpenEditSide: PropTypes.func
 }

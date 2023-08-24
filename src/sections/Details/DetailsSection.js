@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import PropTypes from 'prop-types';
 
 import { Card, Container } from '@mui/material';
 import { _mockDetails } from 'src/_mock/-mockDetails';
@@ -14,11 +15,11 @@ import Keywords from './Keywords';
 import Transcripts from './Transcripts';
 
 
-export default function DetailsSection() {
+export default function DetailsSection({handleOpenEditSide}) {
   const [openShareDialog, setOpenShareDialog] = useState(false);
   const {id} = useParams()
   const [ details, setDetails ] = useState(_mockDetails[id])
-  
+
   useEffect(() => {
     setDetails(_mockDetails[id])
   }, [id])
@@ -36,7 +37,7 @@ export default function DetailsSection() {
   >
     <Card sx={{ m: '0 -1em', p: '2em 1.5em' }}>
       <CardAudio/>
-      <ReportInfo details={details} setOpenShareDialog={setOpenShareDialog}/>
+      <ReportInfo details={details} setOpenShareDialog={setOpenShareDialog} handleOpenEditSide={handleOpenEditSide}/>
       <Summary summary={details.summary}/>
       <LoremIpsum loremIpsum={details.LoremIpsum}/>
       <Keywords keywords={details.Keywords}/>
@@ -45,4 +46,8 @@ export default function DetailsSection() {
       </Card>
   </Container>
   )
+}
+
+DetailsSection.propTypes = {
+  handleOpenEditSide: PropTypes.func
 }

@@ -1,27 +1,33 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 // @mui
-import { Box, Button, Checkbox, Divider, Drawer, FormControl, IconButton, Input, InputAdornment, InputLabel, MenuItem, OutlinedInput, RadioGroup, Select, Stack, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+  RadioGroup,
+  Select,
+  Stack,
+  TextField,
+  Typography
+} from '@mui/material';
+
+import { _roles } from 'src/_mock/assets';
 
 // components
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import UploadBox from './UploadBox';
 import CustomOption from '../sortBy/CustomOption';
+import Participant from './Participant';
 
-const positionOptions = [
-  'top',
-  'left',
-  'right',
-  'bottom',
-  'top left',
-  'top right',
-  'bottom left',
-  'bottom right',
-  'center',
-  'center left',
-  'center right',
-]
+const positionOptions = _roles
 
 // ----------------------------------------------------------------------
 
@@ -30,11 +36,16 @@ export default function CreateDialog({
   onOpen,
   onClose,
 }) {
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [participants, setParticipants] = useState([]);
   const [OptionsValue, setOptionsValue] = useState('');
   const [radioValue, setRadioValue] = useState('');
+  const [Name, setName] = useState('');
+
+  const handleAddParticipant = () => {
+    setParticipants([...participants, {name: Name, position: OptionsValue, id: Date.now()}]);
+    setName('');
+    setOptionsValue('');
+  }
   
  
 
@@ -199,8 +210,8 @@ export default function CreateDialog({
           gap: 1
         }}>
         <TextField
-      // value={'name'}
-        onChange={console.log}
+        value={Name}
+        onChange={(e) => setName(e.target.value)}
         placeholder="Name"
         InputProps={{
           sx: {
@@ -253,10 +264,15 @@ export default function CreateDialog({
               color: '#2292F9',
               border: '2px solid #2292F9',
               }
-          }}>
+          }}
+          onClick={handleAddParticipant}
+          >
           <Iconify icon="eva:plus-fill" />
         </Button>
         </Box>
+        {participants.length > 0 && participants.map((item) => (
+          <Participant item={item} key={item.id} setParticipants={setParticipants}/>
+        ))}
     </Stack></>
   );
 

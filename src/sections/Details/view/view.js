@@ -1,5 +1,7 @@
 import { Box} from '@mui/material';
 // src
+import { CreateDialog } from 'src/components/Dialogs';
+import { useState } from 'react';
 import DetailsSection from '../DetailsSection';
 import TakeawaysSection from '../TakeawaysSection';
 
@@ -8,6 +10,15 @@ import TakeawaysSection from '../TakeawaysSection';
 
 
 export default function DetailsView() {
+  const [openEditSide, setOpenEditSide] = useState(false);
+  const handleOpenEditSide = () => {
+    setOpenEditSide(true);
+  }
+
+  const handleCloseEditSide = () => {
+    setOpenEditSide(false);
+  }
+
   return (
     <Box
     sx={{
@@ -17,8 +28,9 @@ export default function DetailsView() {
       gap: 1,
       justifyContent: 'center',
     }}>
-      <DetailsSection/>
+      <DetailsSection handleOpenEditSide={handleOpenEditSide}/>
       <TakeawaysSection/>
+      <CreateDialog open={openEditSide} onClose={handleCloseEditSide} />
   </Box>
   );
 }
