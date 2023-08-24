@@ -10,7 +10,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { format } from 'date-fns';
 
 export default function ReportInfo({details, setOpenShareDialog}) {
-  const [showParticipants, setShowParticipants] = useState(false);
+  const [showParticipants, setShowParticipants] = useState(true);
   return (
     <Card sx={{p: '1.5em 1em', mt: 2, backgroundColor: '#F6F7F8'}}>
       <Box
