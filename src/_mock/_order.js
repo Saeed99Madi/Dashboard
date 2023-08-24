@@ -68,7 +68,7 @@ export const _orders = [...Array(20)].map((_, index) => {
     ],
   };
   return {
-    id: _mock.id(index),
+    id: index + 1,
     meetingReport: _mock.meetingReport(index),
     createdAt: _mock.time(index),
     taxes,

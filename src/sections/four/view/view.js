@@ -81,7 +81,6 @@ const canReset =
   !!filters.name || filters.status !== 'all' || (!!filters.startDate && !!filters.endDate);
 
 
-
   const denseHeight = table.dense ? 52 : 72;
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
@@ -97,7 +96,7 @@ const canReset =
 
   const handleViewRow = useCallback(
     (id) => {
-      router.push(paths.dashboard.order.details(id));
+      router.push(paths.dashboard.details(id));
     },
     [router]
   );

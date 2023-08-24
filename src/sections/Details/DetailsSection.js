@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { Card, Container } from '@mui/material';
@@ -17,7 +17,11 @@ import Transcripts from './Transcripts';
 export default function DetailsSection() {
   const [openShareDialog, setOpenShareDialog] = useState(false);
   const {id} = useParams()
-  const [ details ] = useState(_mockDetails[id])
+  const [ details, setDetails ] = useState(_mockDetails[id])
+  
+  useEffect(() => {
+    setDetails(_mockDetails[id])
+  }, [id])
   return (
     <Container
     maxWidth='65%'

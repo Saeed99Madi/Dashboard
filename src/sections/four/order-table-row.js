@@ -19,11 +19,12 @@ import { useEffect, useState } from 'react';
 import {  useSettingsContext } from 'src/components/settings/context/settings-context';
 import { ParticipantPopup } from 'src/components/Dialogs';
 import {BiFile} from 'react-icons/bi';
+import { useNavigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 
 export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }) {
-  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment } = row;
+  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment, id } = row;
   const [description, setDescription] = useState(meetingReport.description);
 
   const confirm = useBoolean();

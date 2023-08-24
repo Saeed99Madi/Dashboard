@@ -39,7 +39,7 @@ import { HEADER, NAV } from '../config-layout';
 export default function Header({ onOpenNav }) {
   const [tableData] = useState(_orders);
   const {id} = useParams()
-  const [ details ] = useState(_mockDetails[id])
+  const [ details, setDetails ] = useState(_mockDetails[id])
   const {pathname} = useLocation();
   const [isDetails, setIsDetails] = useState(false);
   const theme = useTheme();
@@ -58,11 +58,12 @@ export default function Header({ onOpenNav }) {
   
   useEffect(() => {
     if (pathname.includes('/details/')) {
+      setDetails(_mockDetails[id])
       setIsDetails(true);
     }else {
       setIsDetails(false);
     }
-  }, [pathname])
+  }, [id, pathname])
 
   const renderContent = (
     <>
