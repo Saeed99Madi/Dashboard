@@ -12,6 +12,7 @@ export const defaultFilters = {
   endDate: '',
   Revenue: [],
   SortBy: '',
+  name: '',
 };
 export const FiltersContextProvider = ({children}) => {
   const [filters, setFilters] = useState(defaultFilters);

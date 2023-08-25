@@ -31,6 +31,13 @@ export function applyFilter({ inputData, comparator, filters, dateError }) {
 
   inputData = stabilizedThis.map((el) => el[0]);
 
+  if (filters?.name) {
+    inputData = inputData.filter(
+      (order) =>
+        order.meetingReport.name.toLowerCase().includes(filters?.name.toLowerCase())
+    );
+  }
+
   if (filters?.SortBy)  {
     if (filters?.SortBy === 'Latest created') {
       inputData = inputData.reverse();

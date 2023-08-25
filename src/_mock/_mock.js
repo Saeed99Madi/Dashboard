@@ -59,11 +59,11 @@ export const _mock = {
   boolean: (index) => _booleans[index],
   role: (index) => _roles[index],
   meetingReport: (index) => index % 2 === 0 ? {
-    description: 'User Interview on First Project',
+    name: 'User Interview on First Project',
     icon: <BsFillMicFill/>,
     Analyzing: index === 0
   }: {
-    description: index === 3 ? 'Customer Feedback on Second Project Customer Feedback on Second Project' :  'Customer Feedback on Second Project',
+    name: index === 3 ? 'Customer Feedback on Second Project Customer Feedback on Second Project' :  'Customer Feedback on Second Project',
     icon: <RiFileList2Fill/>,
     Analyzing: index === 0
   },
@@ -80,7 +80,7 @@ export const _mock = {
   tourName: (index) => _tourNames[index],
   productName: (index) => _productNames[index],
   sentence: (index) => index >= _sentences.length ? _sentences[_sentences.length - 2] : _sentences[index],
-  description: (index) => _descriptions[index],
+  name: (index) => _descriptions[index],
   // Contact
   email: (index) => _emails[index],
   phoneNumber: (index) => _phoneNumbers[index],

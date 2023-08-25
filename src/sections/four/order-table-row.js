@@ -19,13 +19,12 @@ import { useEffect, useState } from 'react';
 import {  useSettingsContext } from 'src/components/settings/context/settings-context';
 import { ParticipantPopup } from 'src/components/Dialogs';
 import {BiFile} from 'react-icons/bi';
-import { useNavigate } from 'react-router';
 
 // ----------------------------------------------------------------------
 
 export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }) {
-  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment, id } = row;
-  const [description, setDescription] = useState(meetingReport.description);
+  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment } = row;
+  const [name, setName] = useState(meetingReport.name);
 
   const confirm = useBoolean();
 
@@ -44,21 +43,21 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   useEffect(() => {
     if (themeLayout === 'mini') {
       if (meetingReport.Analyzing) {
-        setDescription(`${meetingReport.description.slice(0, 22)} ...`)
-      }else if (meetingReport.description.length > 35) {
-        setDescription(`${meetingReport.description.slice(0, 35)} ...`)
+        setName(`${meetingReport.name.slice(0, 22)} ...`)
+      }else if (meetingReport.name.length > 35) {
+        setName(`${meetingReport.name.slice(0, 35)} ...`)
       } else {
-        setDescription(meetingReport.description)
+        setName(meetingReport.name)
       }
     } else if (meetingReport.Analyzing) {
-        setDescription(`${meetingReport.description.slice(0, 10)} ...`)
-      }else if (meetingReport.description.length > 30) {
-        setDescription(`${meetingReport.description.slice(0, 23)} ...`)
+        setName(`${meetingReport.name.slice(0, 10)} ...`)
+      }else if (meetingReport.name.length > 30) {
+        setName(`${meetingReport.name.slice(0, 23)} ...`)
       } else {
-        setDescription(meetingReport.description)
+        setName(meetingReport.name)
       }
     
-  }, [meetingReport.Analyzing, meetingReport.description, themeLayout])
+  }, [meetingReport.Analyzing, meetingReport.name, themeLayout])
 
   const renderPrimary = (
     <TableRow hover selected={selected}>
@@ -79,7 +78,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
           }}
         >
           {meetingReport.icon}
-          {description}
+          {name}
           {meetingReport.Analyzing && <Typography sx={{
             backgroundColor: '#FBDBAC',
             color: '#B37908',
