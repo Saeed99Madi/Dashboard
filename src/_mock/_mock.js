@@ -1,8 +1,6 @@
 import { sub } from 'date-fns';
 // config
 import { ASSETS_API } from 'src/config-global';
-import { BsFillMicFill } from 'react-icons/bs';
-import {RiFileList2Fill} from 'react-icons/ri';
 //
 import {
   _id,
@@ -51,6 +49,8 @@ const _customers = [
   }
 ]
 
+
+
 const _participants = [ 4, 2, 6, 4, 4 ]
 const _takeaways = [ 4, 2, 6, 4, 4 ]
 export const _mock = {
@@ -60,11 +60,9 @@ export const _mock = {
   role: (index) => _roles[index],
   meetingReport: (index) => index % 2 === 0 ? {
     name: 'User Interview on First Project',
-    icon: <BsFillMicFill/>,
     Analyzing: index === 0
   }: {
     name: index === 3 ? 'Customer Feedback on Second Project Customer Feedback on Second Project' :  'Customer Feedback on Second Project',
-    icon: <RiFileList2Fill/>,
     Analyzing: index === 0
   },
   // Customer

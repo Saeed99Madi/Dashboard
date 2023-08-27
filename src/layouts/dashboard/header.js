@@ -26,13 +26,12 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
-import {PiCrownSimpleFill} from 'react-icons/pi';
-
 import { useEffect, useState } from 'react';
 import { _orders } from 'src/_mock/_order';
 import { _mockDetails } from 'src/_mock/-mockDetails';
 import { AccountPopover, NotificationsPopover } from '../_common';
 import { HEADER, NAV } from '../config-layout';
+import { useHeaderData } from './config-navigation';
 
 // ----------------------------------------------------------------------
 
@@ -44,6 +43,8 @@ export default function Header({ onOpenNav }) {
   const [isDetails, setIsDetails] = useState(false);
   const theme = useTheme();
 
+  const headerData = useHeaderData()
+  console.log(headerData[0]);
   const settings = useSettingsContext();
 
   const isNavHorizontal = settings.themeLayout === 'horizontal';
@@ -158,10 +159,10 @@ export default function Header({ onOpenNav }) {
               
             }
           }}>
-          <PiCrownSimpleFill />
+            {headerData[0].crown}
           UPGRADE
         </Button>
-        <NotificationsPopover />
+        <NotificationsPopover notificationIcon={headerData[0].notification} />
         <AccountPopover />
       </Stack>
     </>

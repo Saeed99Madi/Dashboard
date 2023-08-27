@@ -8,18 +8,17 @@ import ListItemButton from '@mui/material/ListItemButton';
 
 export const StyledItem = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active',
-})(({ active, depth, config, theme }) => {
+})(({ active, depth, config, theme, Sub, isOpen }) => {
   const subItem = depth !== 1;
 
   const deepSubItem = depth > 2;
 
   const activeStyles = {
     root: {
-      color:
-        theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.primary.light,
-      backgroundColor: alpha(theme.palette.primary.main, 0.08),
+      color: Sub ? '#6EA9EE' : '#fff',
+
       '&:hover': {
-        backgroundColor: alpha(theme.palette.primary.main, 0.16),
+        backgroundColor: alpha('#6EA9EE', 0.16),
       },
     },
     sub: {
@@ -33,12 +32,19 @@ export const StyledItem = styled(ListItemButton, {
 
   return {
     // Root item
+    marginLeft: Sub &&  '2em',
     padding: config.itemPadding,
     marginBottom: config.itemGap,
     borderRadius: config.itemRadius,
     minHeight: config.itemRootHeight,
-    color: theme.palette.text.secondary,
+    color: isOpen ? '#fff' : theme.palette.text.secondary,
 
+    // ...(Sub && {
+    //   display: 'flex',
+    //   flexDirection: 'row-reverse',
+    //   alignItems: 'center',
+    //   justifyContent: 'flex-start'
+    // }),
     // Active root item
     ...(active && {
       ...activeStyles.root,
@@ -47,6 +53,7 @@ export const StyledItem = styled(ListItemButton, {
     // Sub item
     ...(subItem && {
       minHeight: config.itemSubHeight,
+
       // Active sub item
       ...(active && {
         ...activeStyles.sub,
@@ -57,6 +64,9 @@ export const StyledItem = styled(ListItemButton, {
     ...(deepSubItem && {
       paddingLeft: theme.spacing(depth),
     }),
+    // ...(Sup && {
+
+    // })
   };
 });
 

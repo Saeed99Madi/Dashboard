@@ -4,15 +4,21 @@ import { paths } from 'src/routes/paths';
 // components
 import SvgColor from 'src/components/svg-color';
 import Iconify from 'src/components/iconify/iconify';
+import { _orders } from 'src/_mock/_order';
+import { _mockTakeaways } from 'src/_mock/mockTakeaways';
 
 // ----------------------------------------------------------------------
 
 const icon = (name) => (
   <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
-  // OR
-  // <Iconify icon="fluent:mail-24-filled" />
-  // https://icon-sets.iconify.design/solar/
-  // https://www.streamlinehq.com/icons
+);
+
+const homeIcon = (name) => (
+  <SvgColor src={`/assets/icons/home/${name}.svg`} sx={{ width: 19, height: 19 }} />
+);
+
+const HeaderIcon = (name) => (
+  <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 19, height: 19 }}  />
 );
 
 const ICONS = {
@@ -37,9 +43,17 @@ const ICONS = {
   disabled: icon('ic_disabled'),
   external: icon('ic_external'),
   menuItem: icon('ic_menu_item'),
-  ecommerce: icon('ic_ecommerce'),
-  analytics: icon('ic_analytics'),
-  dashboard: icon('ic_dashboard'),
+  sales: icon('ic_sales'),
+  person: icon('ic_person'),
+  dashboard: icon('ic_home'),
+  settings: icon('ic_settings'),
+  support: icon('ic_support'),
+  searchIcon: homeIcon('ic_search'),
+  mic: homeIcon('ic_mic'),
+  cloud: homeIcon('ic_cloud'),
+  reportFile: homeIcon('ic_file'),
+  crown: HeaderIcon('ic_crown'),
+  notification: HeaderIcon('ic_notification'),
 };
 
 // ----------------------------------------------------------------------
@@ -50,7 +64,7 @@ export function useNavData() {
       // MANAGEMENT
       // ----------------------------------------------------------------------
       {
-        subheader: 'management',
+        subheader: '  ',
         items: [
           {
             textColor: '#6EA9EE',
@@ -66,19 +80,21 @@ export function useNavData() {
               {
                 title: 'All reports',
                 path: paths.dashboard.group.root,
+                orderLength: _orders.length 
               },
               {
                 title: 'Takeaways',
                 path: paths.dashboard.group.five,
+                takeawaysLength: _mockTakeaways.length 
               },
             ],
             path: paths.dashboard.two,
-            icon: ICONS.ecommerce,
+            icon: ICONS.sales,
           },
           {
             title: 'Shared with me',
             path: paths.dashboard.three,
-            icon: ICONS.analytics,
+            icon: ICONS.person,
           },
         ],
       },
@@ -116,9 +132,9 @@ export function useNavSettings() {
           {
             title: 'Account settings',
             path: paths.dashboard.group.six,
-            icon: ICONS.dashboard,
+            icon: ICONS.settings,
           },
-          { title: 'Support', path: paths.dashboard.seven, icon: ICONS.dashboard },
+          { title: 'Support', path: paths.dashboard.seven, icon: ICONS.support },
         ],
       },
     ],
@@ -126,4 +142,30 @@ export function useNavSettings() {
   );
 
   return data;
+}
+
+
+export const useHomeData = () => {
+  const data = useMemo(() => [
+    {
+      searchIcon: ICONS.searchIcon,
+      mic: ICONS.mic,
+      file: ICONS.reportFile,
+      cloud: ICONS.cloud,
+    },
+  ], []);
+
+  return data
+} 
+
+
+export const useHeaderData = () => {
+  const data = useMemo(() => [
+    {
+      crown: ICONS.crown,
+      notification: ICONS.notification,
+    },
+  ], []);
+
+  return data
 }

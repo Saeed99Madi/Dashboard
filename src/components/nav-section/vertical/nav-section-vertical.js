@@ -5,7 +5,6 @@ import List from '@mui/material/List';
 import Stack from '@mui/material/Stack';
 import Collapse from '@mui/material/Collapse';
 //
-import Iconify from 'src/components/iconify/iconify';
 import { navVerticalConfig } from '../config';
 import { StyledSubheader } from './styles';
 
