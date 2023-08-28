@@ -1,5 +1,7 @@
 import { m } from 'framer-motion';
 import { useState, useCallback } from 'react';
+
+import PropTypes from 'prop-types';
 // @mui
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -48,7 +50,7 @@ const TABS = [
 
 // ----------------------------------------------------------------------
 
-export default function NotificationsPopover() {
+export default function NotificationsPopover({notificationIcon}) {
   const drawer = useBoolean();
 
   const smUp = useResponsive('up', 'sm');
@@ -156,7 +158,7 @@ export default function NotificationsPopover() {
         onClick={drawer.onTrue}
       >
         <Badge badgeContent={totalUnRead} color="error">
-          <Iconify icon="solar:bell-bing-bold-duotone" width={24} />
+          {notificationIcon}
         </Badge>
       </IconButton>
 
@@ -199,4 +201,8 @@ export default function NotificationsPopover() {
       </Drawer>
     </>
   );
+}
+
+NotificationsPopover.propTypes = {
+  notificationIcon: PropTypes.node,
 }

@@ -19,11 +19,15 @@ import { useEffect, useState } from 'react';
 import {  useSettingsContext } from 'src/components/settings/context/settings-context';
 import { ParticipantPopup } from 'src/components/Dialogs';
 import {BiFile} from 'react-icons/bi';
+import { useHomeData } from 'src/layouts/dashboard/config-navigation';
 
 // ----------------------------------------------------------------------
 
 export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }) {
-  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment } = row;
+
+  const homeData = useHomeData()
+
+  const {  takeaway, participant, meetingReport, customer, createdAt, user, sentiment, id } = row;
   const [name, setName] = useState(meetingReport.name);
 
   const confirm = useBoolean();
@@ -43,7 +47,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   useEffect(() => {
     if (themeLayout === 'mini') {
       if (meetingReport.Analyzing) {
-        setName(`${meetingReport.name.slice(0, 22)} ...`)
+        setName(`${meetingReport.name.slice(0, 21)} ...`)
       }else if (meetingReport.name.length > 35) {
         setName(`${meetingReport.name.slice(0, 35)} ...`)
       } else {
@@ -62,7 +66,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   const renderPrimary = (
     <TableRow hover selected={selected}>
 
-      <TableCell sx={{ fontFamily:'Poppins', fontWeight: 700 }}>
+      <TableCell sx={{ fontWeight: 700 }}>
         <Box
           onClick={onViewRow}
           sx={{
@@ -77,7 +81,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
             opacity: meetingReport.Analyzing ? 0.5 : 1,
           }}
         >
-          {meetingReport.icon}
+          {id % 2 !== 0 ? homeData[0].mic : homeData[0].file }
           {name}
           {meetingReport.Analyzing && <Typography sx={{
             backgroundColor: '#FBDBAC',

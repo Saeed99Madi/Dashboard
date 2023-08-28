@@ -10,7 +10,7 @@ import NavItem from './nav-item';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data, depth, hasChild, config }) {
+export default function NavList({ data, depth, hasChild, config, Sub }) {
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, hasChild);
@@ -50,11 +50,13 @@ export default function NavList({ data, depth, hasChild, config }) {
             : handleToggle
         }
         config={config}
+        Sub={Sub}
+        isOpen={open && hasChild}
       />
 
       {hasChild && (
         <Collapse in={open} unmountOnExit>
-          <NavSubList data={data.children} depth={depth} config={config} />
+          <NavSubList Sub data={data.children} depth={depth} config={config} />
         </Collapse>
       )}
     </>
@@ -66,20 +68,22 @@ NavList.propTypes = {
   data: PropTypes.object,
   depth: PropTypes.number,
   hasChild: PropTypes.bool,
+  Sub: PropTypes.bool,
 };
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, depth, config }) {
+function NavSubList({ data, depth, config, Sub }) {
   return (
     <>
       {data.map((list) => (
         <NavList
           key={list.title + list.path}
           data={list}
-          depth={depth + 1}
+          depth={depth + 0}
           hasChild={!!list.children}
           config={config}
+          Sub={Sub}
         />
       ))}
     </>
@@ -90,4 +94,5 @@ NavSubList.propTypes = {
   config: PropTypes.object,
   data: PropTypes.array,
   depth: PropTypes.number,
+  Sub: PropTypes.bool,
 };

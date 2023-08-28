@@ -4,8 +4,11 @@ import Iconify from 'src/components/iconify/iconify'
 import MicIcon from '@mui/icons-material/Mic';
 import ArticleIcon from '@mui/icons-material/Article';
 import PropTypes from 'prop-types';
+import { useHomeData } from 'src/layouts/dashboard/config-navigation';
 
 export default function UploadBox({label}) {
+
+  const homeData = useHomeData()
   // Audio
   return (
     <Box sx={{
@@ -21,7 +24,26 @@ export default function UploadBox({label}) {
       flexDirection: 'column',
     }}>
       <Typography sx={{ fontWeight: 500 }} >{label}</Typography>
-      <img style={{cursor: 'pointer'}} src='/public/assets/Import Icon.png' alt='import' />
+      {/* <img style={{cursor: 'pointer'}} src='/public/assets/Import Icon.png' alt='import' /> */}
+      <Box
+        sx={{
+          width: '40px',
+          height: '40px',
+          borderRadius: '50px',
+          backgroundColor: '#D8EBFD',
+          color: '#2292F9',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          '&:hover': {
+            color: '#D8EBFD',
+            backgroundColor: '#2292F9',
+          },
+        }}
+      >
+        {homeData[0].cloud}
+      </Box>
       <Typography sx={{ color: '#7E8695' }} >{label === 'AUDIO' ? 'flac, mp3, mp4, wav' : 'word, text and pdf'}</Typography>
       <Button
       color="inherit"
@@ -44,10 +66,10 @@ export default function UploadBox({label}) {
       startIcon={
         label === 'AUDIO' ?
         <Iconify>
-          <MicIcon/>
+          {homeData[0].mic}
         </Iconify> :
         <Iconify>
-          <ArticleIcon/>
+          {homeData[0].file}
         </Iconify>
       }
     >

@@ -10,6 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Iconify from 'src/components/iconify';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import { CreateDialog, DateDialog, RevenueDialog, SortByDialog } from 'src/components/Dialogs';
+import { useHomeData } from 'src/layouts/dashboard/config-navigation';
 // ----------------------------------------------------------------------
 
 export default function Filters({
@@ -30,7 +31,9 @@ export default function Filters({
   dateError,
   
 }) {
-  
+
+  const homeData = useHomeData()
+
 
   const handleFilterName = useCallback(
     (event) => {
@@ -77,7 +80,7 @@ export default function Filters({
         },
         startAdornment: (
           <InputAdornment position="start">
-            <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', height: '2.7em' }} />
+            {homeData[0].searchIcon}
           </InputAdornment>
         ),
       }}

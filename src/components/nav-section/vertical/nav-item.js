@@ -1,23 +1,26 @@
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 // @mui
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
 import ListItemText from '@mui/material/ListItemText';
+import { Typography } from '@mui/material';
 // routes
 import { RouterLink } from 'src/routes/components';
 //
 import Iconify from '../../iconify';
 //
-import { StyledItem, StyledIcon, StyledDotIcon } from './styles';
+import { StyledItem, StyledIcon } from './styles';
+import CustomNumber from './CustomNumber';
 
 // ----------------------------------------------------------------------
 
-export default function NavItem({ item, open, depth, active, config, externalLink, ...other }) {
-  const { textColor, title, path, icon, info, children, disabled, caption, roles } = item;
+export default function NavItem({ item, open, depth, active, config, externalLink, Sub , isOpen,  ...other }) {
+  const { textColor, title, path, icon, info, children, disabled, caption, roles, orderLength, takeawaysLength } = item;
+
+  // console.log(item);
 
   const subItem = depth !== 1;
-
   const renderContent = (
     <StyledItem
       disableGutters
@@ -25,16 +28,13 @@ export default function NavItem({ item, open, depth, active, config, externalLin
       active={active}
       depth={depth}
       config={config}
+      Sub={Sub}
+      isOpen={isOpen}
       {...other}
     >
+
       <>
         {icon && <StyledIcon size={config.iconSize}>{icon}</StyledIcon>}
-
-        {subItem && (
-          <StyledIcon size={config.iconSize}>
-            <StyledDotIcon active={active} />
-          </StyledIcon>
-        )}
       </>
 
       {!(config.hiddenLabel && !subItem) && (
@@ -76,6 +76,9 @@ export default function NavItem({ item, open, depth, active, config, externalLin
           sx={{ ml: 1, flexShrink: 0 }}
         />
       )}
+      {orderLength && <CustomNumber number={orderLength} active={active} />}
+      {takeawaysLength && <CustomNumber number={takeawaysLength} active={active} />}
+      {/* {takeawaysLength && <Typography variant="body2">{takeawaysLength}</Typography>} */}
     </StyledItem>
   );
 
@@ -119,6 +122,10 @@ export default function NavItem({ item, open, depth, active, config, externalLin
         ...(disabled && {
           cursor: 'default',
         }),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 1
       }}
     >
       {renderContent}
@@ -133,4 +140,6 @@ NavItem.propTypes = {
   externalLink: PropTypes.bool,
   item: PropTypes.object,
   open: PropTypes.bool,
+  Sub: PropTypes.bool,
+  isOpen: PropTypes.bool
 };

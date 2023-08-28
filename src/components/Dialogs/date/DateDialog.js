@@ -227,8 +227,8 @@ export default function DateDialog({
 DateDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
-  startDate: PropTypes.instanceOf(Date),
-  endDate: PropTypes.instanceOf(Date),
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
   onChangeStartDate: PropTypes.func,
   onChangeEndDate: PropTypes.func,
   error: PropTypes.bool,

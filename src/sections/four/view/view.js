@@ -24,7 +24,7 @@ import TablePaginationCustom from '../TablePaginationCustom';
 
 const TABLE_HEAD = [
   { id: 'meetingReport', label: 'Meeting Report', width: 300, isNavMiniWidth: 240 },
-  { id: 'createdBy', label: 'Created by', width: 180, isNavMiniWidth: 150 },
+  { id: 'createdBy', label: 'Created by', width: 180, isNavMiniWidth: 170 },
   { id: 'customer', label: 'Customer', width: 150, isNavMiniWidth: 120 },
   { id: 'uploaded', label: 'Uploaded', width: 130, align: 'center', isNavMiniWidth: 100 },
   { id: 'sentiment', label: 'Sentiment', width: 140, isNavMiniWidth: 110 },
