@@ -66,7 +66,11 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   const renderPrimary = (
     <TableRow hover selected={selected}>
 
-      <TableCell sx={{ fontWeight: 700 }}>
+      <TableCell 
+        sx={{ fontWeight: 700 }}
+        align='left'
+        // height='10px'
+      >
         <Box
           onClick={onViewRow}
           sx={{
@@ -96,8 +100,11 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
         </Box>
       </TableCell>
 
-      <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-        <Avatar alt={user.name} src={user.avatarUrl} sx={{ mr: 2 }} />
+      <TableCell
+        sx={{ display: 'flex', alignItems: 'center' }}
+        align='left'
+        >
+        <Avatar alt={user.name} src={user.avatarUrl} sx={{ mr: 1, width: 32, height: 32 }} />
 
         <ListItemText
           primary={user.name}
@@ -106,21 +113,28 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
         />
       </TableCell>
 
-      <TableCell sx={{color: '#7E8695'}} align="center"> {customer?.name} </TableCell>
-      <TableCell>
+      <TableCell
+        sx={{color: '#7E8695'}}
+        align='left'
+      > {customer?.name}
+      </TableCell>
+      <TableCell
+        align='left'
+      >
         <ListItemText
           primary={format(new Date(createdAt), 'dd MMM yyyy')}
           primaryTypographyProps={{ typography: 'body2', noWrap: true }}
           sx={{color: '#7E8695'}}
         />
       </TableCell>
-
-
-      <TableCell>
+      <TableCell
+        align='left'
+      >
         <Sentiment sentiment={+sentiment}/>
       </TableCell>
-
-      <TableCell>
+      <TableCell
+        align='left'
+      >
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
@@ -134,8 +148,9 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
           {participant}
           </Box>
       </TableCell>
-
-      <TableCell>
+      <TableCell
+        align='left'
+      >
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
