@@ -31,7 +31,7 @@ export const dashboardRoutes = [
       </DashboardLayout>
     ),
     children: [
-      // { element: <IndexPage />, index: true },
+      { element: <PageFour />, index: true },
       { path: 'two', element: <PageTwo /> },
       // { path: 'three', element: <PageThree /> },
       // { path: 'seven', element: <PageSeven /> },
@@ -39,7 +39,7 @@ export const dashboardRoutes = [
       {
         path: 'group',
         children: [
-          { element: <PageFour />, index: true },
+          // { element: <PageFour />, index: true },
           { path: 'five', element: <PageFive /> },
           { path: 'six', element: <PageSix /> },
         ],

@@ -79,7 +79,7 @@ export function useNavData() {
             children: [
               {
                 title: 'All reports',
-                path: paths.dashboard.group.root,
+                path: paths.dashboard.root,
                 orderLength: _orders.length 
               },
               {
