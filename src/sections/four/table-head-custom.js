@@ -43,7 +43,7 @@ export default function TableHeadCustom({
         {headLabel.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.align || 'left'}
+            align='left'
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{
               width: !isNavMini ? headCell.isNavMiniWidth : headCell.width,
