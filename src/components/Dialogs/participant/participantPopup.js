@@ -36,7 +36,7 @@ export default function ParticipantPopup({anchorEl, setAnchorEl, handlePopoverCl
           vertical: 'top',
           horizontal: 'center',
         }}
-        sx={{backgroundColor: '#00000063'}}
+        // sx={{backgroundColor: '#00000063'}}
       >
         <Box
           sx={{
