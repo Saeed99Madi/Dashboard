@@ -23,13 +23,13 @@ import TablePaginationCustom from '../TablePaginationCustom';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'meetingReport', label: 'Meeting Report', width: 300, isNavMiniWidth: 240 },
-  { id: 'createdBy', label: 'Created by', width: 180, isNavMiniWidth: 170 },
-  { id: 'customer', label: 'Customer', width: 150, isNavMiniWidth: 130 },
-  { id: 'uploaded', label: 'Uploaded', width: 130, align: 'center', isNavMiniWidth: 100 },
-  { id: 'sentiment', label: 'Sentiment', width: 140, isNavMiniWidth: 110 },
-  { id: 'participants', label: 'Participants', width: 100, isNavMiniWidth: 70 },
-  { id: 'takeaway', label: 'Takeaway', width: 100, isNavMiniWidth: 70 },
+  { id: 'meetingReport', label: 'Meeting Report', width: '27%', isNavMiniWidth: '24%' },
+  { id: 'createdBy', label: 'Created by', width: '15%', isNavMiniWidth: '23%' },
+  { id: 'customer', label: 'Customer', width: '15%', isNavMiniWidth: '23%' },
+  { id: 'uploaded', label: 'Uploaded', width: '11%', align: 'center', isNavMiniWidth: '10%' },
+  { id: 'sentiment', label: 'Sentiment', width: '11%', isNavMiniWidth: '10%' },
+  { id: 'participants', label: 'Participants', width: '11%', isNavMiniWidth: '5%' },
+  { id: 'takeaway', label: 'Takeaway', width: '10%', isNavMiniWidth: '5%' },
 ];
 
 
@@ -161,7 +161,7 @@ const canReset =
               position: 'relative',
               overflow: 'unset',
               m: ' 0 25px',
-              maxWidth: 'calc(100% - 50px)'
+              maxWidth: 'calc(100% - 50px)',
             }}
           >
             <Scrollbar>

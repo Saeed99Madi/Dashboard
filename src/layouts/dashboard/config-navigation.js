@@ -51,7 +51,9 @@ const ICONS = {
   searchIcon: homeIcon('ic_search'),
   mic: homeIcon('ic_mic'),
   cloud: homeIcon('ic_cloud'),
+  vote: homeIcon('ic_vote'),
   reportFile: homeIcon('ic_file'),
+  comment: homeIcon('ic_comment'),
   crown: HeaderIcon('ic_crown'),
   notification: HeaderIcon('ic_notification'),
 };
@@ -152,6 +154,8 @@ export const useHomeData = () => {
       mic: ICONS.mic,
       file: ICONS.reportFile,
       cloud: ICONS.cloud,
+      comment: ICONS.comment,
+      vote: ICONS.vote,
     },
   ], []);
 

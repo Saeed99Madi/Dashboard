@@ -50,6 +50,7 @@ export default function TableHeadCustom({
               minWidth: !isNavMini ? headCell.isNavMiniWidth : headCell.width,
               borderTopLeftRadius: headCell.label === 'Meeting Report' ? '8px' : '',
               borderTopRightRadius: headCell.label === 'Takeaway' ? '8px' : '',
+              fontWeight: '400',
             }}
           >
             {headCell.label}
