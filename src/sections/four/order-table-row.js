@@ -47,16 +47,16 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
   useEffect(() => {
     if (themeLayout === 'mini') {
       if (meetingReport.Analyzing) {
-        setName(`${meetingReport.name.slice(0, 21)} ...`)
-      }else if (meetingReport.name.length > 35) {
-        setName(`${meetingReport.name.slice(0, 35)} ...`)
+        setName(`${meetingReport.name.slice(0, 18)} ...`)
+      }else if (meetingReport.name.length > 30) {
+        setName(`${meetingReport.name.slice(0, 30)} ...`)
       } else {
         setName(meetingReport.name)
       }
     } else if (meetingReport.Analyzing) {
-        setName(`${meetingReport.name.slice(0, 10)} ...`)
-      }else if (meetingReport.name.length > 30) {
-        setName(`${meetingReport.name.slice(0, 23)} ...`)
+        setName(`${meetingReport.name.slice(0, 5)} ...`)
+      }else if (meetingReport.name.length > 16) {
+        setName(`${meetingReport.name.slice(0, 16)} ...`)
       } else {
         setName(meetingReport.name)
       }
@@ -67,7 +67,7 @@ export default function OrderTableRow({ row, selected , onViewRow, onDeleteRow }
     <TableRow hover selected={selected}>
 
       <TableCell 
-        sx={{ fontWeight: 700 }}
+        sx={{ fontWeight: 500 }}
         align='left'
         // height='10px'
       >

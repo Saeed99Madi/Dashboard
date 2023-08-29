@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Box, Button, Card, Typography } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
-import ChatIcon from '@mui/icons-material/Chat';
+import { useHomeData } from 'src/layouts/dashboard/config-navigation';
 import PropTypes from 'prop-types'
 import TakeawaysTag from './TakeawaysTag';
 import TakeawaysLabel from './TakeawaysLabel';
@@ -10,7 +9,15 @@ import TakeawayComment from './TakeawayComment';
 
 export default function Takeaway({takeaway}) {
   const [showComments, setShowComments] = useState(false);
-  // console.log();
+  const [clicked, setClicked] = useState(false);
+  const homeData = useHomeData()
+  console.log(homeData[0].comment.props.sx);
+  const {comment, vote} = homeData[0]
+  comment.props.sx.width = 15;
+  comment.props.sx.height = 15;
+  comment.props.sx.mb = -.5;
+  vote.props.sx.ml = -1;
+
   return (
   <Card 
   sx={{
@@ -27,7 +34,9 @@ export default function Takeaway({takeaway}) {
       <TakeawaysTag key={tag} tag={tag} />
     ))}
   </Box>
-  <Typography>{takeaway.description}</Typography>
+  <Typography sx={{
+    fontWeight: '500'
+  }}>{takeaway.description}</Typography>
   <Box sx={{
     display: 'flex',
     alignItems: 'center',
@@ -62,47 +71,57 @@ export default function Takeaway({takeaway}) {
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: '100%',
-    gap: 1
+    gap: .5
   }}>
     <Button
     sx={{
       color: '#fff',
-      backgroundColor: takeaway.vote.clicked ? '#1A2638' : '#2292F9',
-      fontSize: '13px',
+      backgroundColor: !clicked ? '#1A2638' : '#2292F9',
+      fontSize: '14px',
       borderRadius: '50px',
-      gap: .8,
-      padding: '.3em 1em',
+      gap: 0.3,
+      padding: '.4em 1.2em',
+      minWidth: '8.5em',
+      border: '1px solid',
+      borderColor: !clicked ? '#1A2638' : '#2292F9',
       '&:hover': {
-        backgroundColor: '#1a2638e3'
+        backgroundColor: !clicked ? '#1A2638' : '#2292F9',
       },
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
+    }}
+    onClick={() => {
+      setClicked(!clicked)
     }}
     >
-      <KeyboardDoubleArrowUpIcon sx={{fontSize: '16px'}}/>
-      <Typography sx={{fontSize: '13px'}} >{takeaway.vote.number}</Typography>
-      <Typography sx={{fontSize: '13px'}}>{takeaway.vote.clicked ? 'upvote' : 'Voted'}</Typography>
+      {vote}
+      <Typography sx={{fontSize: '14px'}} >{!clicked ? takeaway.vote.number : takeaway.vote.number + 1}</Typography>
+      <Typography sx={{fontSize: '14px'}}>{!clicked ? 'upvote' : 'Voted'}</Typography>
     </Button>
 
     <Button
     sx={{
-      color: '#1A2638',
+      color: '#586474',
       backgroundColor: 'transparent',
-      fontSize: '13px',
+      fontSize: '14px',
       borderRadius: '50px',
-      padding: '.2em 1em',
+      padding: '.3em 1em',
       ml: 1,
       gap: .8,
-      border: '1px solid #1A2638',
+      fontWeight: 'bold',
+      border: '1px solid #586474',
+      // display: 'flex',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       '&:hover': {
         backgroundColor: '#1a263808'
       }
     }}
     onClick={() => setShowComments(!showComments)}
     >
-      <ChatIcon sx={{fontSize: '16px'}}/>
-      comments
+      {comment}
+      <Typography>comments</Typography>
     </Button>
   </Box>
     {takeaway.comments.length > 1 ? 
@@ -114,8 +133,8 @@ export default function Takeaway({takeaway}) {
     </Typography>}
 
     {showComments && takeaway.comments.length > 1 &&
-      takeaway.comments.slice(0, takeaway.comments.length - 1).map((comment) => (
-        <TakeawayComment key={takeaway.id} comment={comment} />
+      takeaway.comments.slice(0, takeaway.comments.length - 1).map((item) => (
+        <TakeawayComment key={item.id} comment={item} />
       ))
 
     }

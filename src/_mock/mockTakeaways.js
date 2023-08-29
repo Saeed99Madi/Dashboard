@@ -19,9 +19,11 @@ export const _mockTakeaways = [...Array(20)].map((_, index) => {
   const comments = [...Array(index)].map(( e , i) =>{
     const text = _sentences[random(0, 20)]
     const avatarUrl = _mock.image.avatar(i)
+    const id = i * index
     return {
       text,
-      avatarUrl
+      avatarUrl,
+      id
     }
   });
   const vote = {
