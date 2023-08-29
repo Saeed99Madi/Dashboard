@@ -9,7 +9,6 @@ import {
   Toolbar,
   IconButton,
   useTheme,
-  Button
 } from '@mui/material';
 
 // theme
@@ -29,7 +28,9 @@ import { useSettingsContext } from 'src/components/settings';
 import { useEffect, useState } from 'react';
 import { _orders } from 'src/_mock/_order';
 import { _mockDetails } from 'src/_mock/-mockDetails';
-import { AccountPopover, NotificationsPopover } from '../_common';
+import { AccountPopover,
+  // NotificationsPopover
+} from '../_common';
 import { HEADER, NAV } from '../config-layout';
 import { useHeaderData } from './config-navigation';
 
@@ -147,7 +148,7 @@ export default function Header({ onOpenNav }) {
         justifyContent="flex-end"
         spacing={{ xs: 0.5, sm: 1 }}
       >
-        <Button
+        {/* <Button
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -161,8 +162,8 @@ export default function Header({ onOpenNav }) {
           }}>
             {headerData[0].crown}
           UPGRADE
-        </Button>
-        <NotificationsPopover notificationIcon={headerData[0].notification} />
+        </Button> */}
+        {/* <NotificationsPopover notificationIcon={headerData[0].notification} /> */}
         <AccountPopover />
       </Stack>
     </>

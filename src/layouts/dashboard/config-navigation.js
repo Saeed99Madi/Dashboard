@@ -73,7 +73,7 @@ export function useNavData() {
             path: '#',
             icon: <Iconify color="#6EA9EE" icon="mingcute:add-line" />,
           },
-          { title: 'Home', path: paths.dashboard.root, icon: ICONS.dashboard },
+          // { title: 'Home', path: paths.dashboard.root, icon: ICONS.dashboard },
           {
             title: 'Sales team',
             children: [
@@ -91,11 +91,11 @@ export function useNavData() {
             path: paths.dashboard.two,
             icon: ICONS.sales,
           },
-          {
-            title: 'Shared with me',
-            path: paths.dashboard.three,
-            icon: ICONS.person,
-          },
+          // {
+          //   title: 'Shared with me',
+          //   path: paths.dashboard.three,
+          //   icon: ICONS.person,
+          // },
         ],
       },
 
@@ -134,7 +134,7 @@ export function useNavSettings() {
             path: paths.dashboard.group.six,
             icon: ICONS.settings,
           },
-          { title: 'Support', path: paths.dashboard.seven, icon: ICONS.support },
+          // { title: 'Support', path: paths.dashboard.seven, icon: ICONS.support },
         ],
       },
     ],
