@@ -114,7 +114,7 @@ export default function Header({ onOpenNav }) {
             sx={{
               width: 32,
               height: 32,
-              ml: '-10px',
+              ml: '-6px',
               border: '1px solid #fff',
               cursor: 'pointer',
             }}
